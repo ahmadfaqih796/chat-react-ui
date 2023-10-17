@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import moment from "moment";
-import client from "./feathers";
+import client from "../../utils/feathers/client";
 
 const Chat = ({ users, messages }) => {
   const chatRef = useRef(null);
