@@ -61,21 +61,20 @@ const Chat = ({ users, messages }) => {
           <ul className="flex flex-column flex-1 list-unstyled user-list">
             {users.map(user => (
               <li key={user.id}>
-                <a className="block relative" href="#">
+                <button className="block relative">
                   <img src={user.avatar} alt={user.email} className="avatar" />
                   <span className="absolute username">{user.email}</span>
-                </a>
+                </button>
               </li>
             ))}
           </ul>
           <footer className="flex flex-row flex-center">
-            <a
-              href="#"
+            <button
               onClick={() => client.logout()}
               className="button button-primary"
             >
               Sign Out
-            </a>
+            </button>
           </footer>
         </aside>
 
