@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Login from './Login';
 import Chat from './Chat';
 import client from './feathers';
+import LoadingSpinner from './components/loading/LoadingSpinner';
 
 const messagesService = client.service('messages');
 const usersService = client.service('users');
@@ -63,11 +64,7 @@ const Application = () => {
   }, []);
 
   if (loading) {
-    return (
-      <main className="container text-center">
-        <h1>Loading...</h1>
-      </main>
-    );
+    return <LoadingSpinner />;
   } else if (login) {
     return <Chat messages={messages} users={users} />;
   }
