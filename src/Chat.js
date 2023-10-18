@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
-import moment from "moment";
-import client from "../../utils/feathers/client";
+import React, { useEffect, useRef } from 'react';
+import moment from 'moment';
+import client from './feathers';
 
 const Chat = ({ users, messages }) => {
   const chatRef = useRef(null);
@@ -11,10 +11,10 @@ const Chat = ({ users, messages }) => {
 
     if (text) {
       client
-        .service("messages")
+        .service('messages')
         .create({ text })
         .then(() => {
-          input.value = "";
+          input.value = '';
         });
     }
 
@@ -27,12 +27,12 @@ const Chat = ({ users, messages }) => {
   }
 
   useEffect(() => {
-    client.service("messages").on("created", scrollToBottom);
+    client.service('messages').on('created', scrollToBottom);
     scrollToBottom();
 
     return () => {
       // Clean up listeners
-      client.service("messages").removeListener("created", scrollToBottom);
+      client.service('messages').removeListener('created', scrollToBottom);
     };
   });
 
@@ -48,18 +48,18 @@ const Chat = ({ users, messages }) => {
           <span className="title">Chat</span>
         </div>
       </header>
-
+      xzxzx
       <div className="flex flex-row flex-1 clear">
         <aside className="sidebar col col-3 flex flex-column flex-space-between">
           <header className="flex flex-row flex-center">
             <h4 className="font-300 text-center">
-              <span className="font-600 online-count">{users.length}</span>{" "}
+              <span className="font-600 online-count">{users.length}</span>{' '}
               users
             </h4>
           </header>
 
           <ul className="flex flex-column flex-1 list-unstyled user-list">
-            {users.map((user) => (
+            {users.map(user => (
               <li key={user.id}>
                 <a className="block relative" href="#">
                   <img src={user.avatar} alt={user.email} className="avatar" />
@@ -81,8 +81,8 @@ const Chat = ({ users, messages }) => {
 
         <div className="flex flex-column col col-9">
           <main className="chat flex flex-column flex-1 clear" ref={chatRef}>
-            {JSON.stringify(messages)}
-            {messages.map((message) => (
+            {/* {JSON.stringify(messages)} */}
+            {messages.map((message, index) => (
               <div key={message.id} className="message flex flex-row">
                 <img
                   src={message.user?.name}
@@ -93,9 +93,10 @@ const Chat = ({ users, messages }) => {
                   <p className="message-header">
                     <span className="username font-600">{message.id}</span>
                     <span className="sent-date font-300">
-                      {moment(message.createdAt).format("MMM Do, hh:mm:ss")}
+                      {moment(message.createdAt).format('MMM Do, hh:mm:ss')}
                     </span>
                   </p>
+                  {index}
                   <p className="message-content font-300">{message.text}</p>
                 </div>
               </div>

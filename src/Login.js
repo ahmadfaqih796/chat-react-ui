@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import client from "../../utils/feathers/client";
+import React, { useState } from 'react';
+import client from './feathers';
 
 const Login = () => {
   const [email, setEmail] = useState();
@@ -7,7 +7,7 @@ const Login = () => {
   const [error, setError] = useState();
 
   function updateField(cb) {
-    return (ev) => {
+    return ev => {
       cb(ev.target.value);
     };
   }
@@ -15,16 +15,16 @@ const Login = () => {
   function login() {
     return client
       .authenticate({
-        strategy: "local",
+        strategy: 'local',
         email,
         password,
       })
-      .catch((err) => setError(err));
+      .catch(err => setError(err));
   }
 
   function signup() {
     return client
-      .service("users")
+      .service('users')
       .create({ email, password })
       .then(() => login());
   }
