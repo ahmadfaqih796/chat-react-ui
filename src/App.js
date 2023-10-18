@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Login from './Login';
+
 import Chat from './Chat';
 import client from './feathers';
 import LoadingSpinner from './components/loading/LoadingSpinner';
+import Login from './components/auth/Login';
 
 const messagesService = client.service('messages');
 const usersService = client.service('users');

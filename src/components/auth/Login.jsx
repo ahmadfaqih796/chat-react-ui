@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import client from './feathers';
+import client from '../../feathers';
 
 const Login = () => {
   const [email, setEmail] = useState();
