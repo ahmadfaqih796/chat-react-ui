@@ -4,7 +4,6 @@ import Chat from './Chat';
 import client from './feathers';
 import LoadingSpinner from './components/loading/LoadingSpinner';
 import Login from './components/auth/Login';
-import Register from './components/auth/Register';
 
 const messagesService = client.service('messages');
 const usersService = client.service('users');
@@ -71,7 +70,7 @@ const Application = () => {
     return <Chat messages={messages} users={users} />;
   }
 
-  return <Register />;
+  return <Login />;
 };
 
 export default Application;
