@@ -7,6 +7,7 @@ import {
   Typography,
 } from '@mui/material';
 import React from 'react';
+import client from '../feathers';
 
 const Sidebar = ({ users }) => {
   return (
@@ -53,6 +54,9 @@ const Sidebar = ({ users }) => {
           </ListItem>
         </Grow>
       ))}
+      <button onClick={() => client.logout()} className="button button-primary">
+        Sign Out
+      </button>
     </List>
   );
 };

@@ -45,7 +45,7 @@ const Chat = ({ users, messages }) => {
             src="http://feathersjs.com/img/feathers-logo-wide.png"
             alt="Feathers Logo"
           />
-          <span className="title">Chat</span>
+          <span className="title">Chat  </span>
         </div>
       </header>
       xzxzx

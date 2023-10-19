@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import Chat from './Chat';
-import client from './feathers';
-import LoadingSpinner from './components/loading/LoadingSpinner';
 import Login from './components/auth/Login';
 import ChatLayout from './components/chats/ChatLayout';
+import LoadingSpinner from './components/loading/LoadingSpinner';
+import client from './feathers';
 
 const messagesService = client.service('messages');
 const usersService = client.service('users');
@@ -18,10 +17,15 @@ const Application = () => {
 
   useEffect(() => {
     // Try to authenticate with the JWT stored in localStorage
-    client.authenticate().catch(() => {
-      setLoading(false);
-      setLogin(null);
-    });
+    client
+      .authenticate()
+      .then(res => {
+        console.log('ssssssssssss', res);
+      })
+      .catch(() => {
+        setLoading(false);
+        setLogin(null);
+      });
 
     // On successfull login
     client.on('authenticated', loginResult => {
