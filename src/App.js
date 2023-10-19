@@ -5,10 +5,9 @@ import ChatLayout from './components/chats/ChatLayout';
 import LoadingSpinner from './components/loading/LoadingSpinner';
 import client from './feathers';
 
-const messagesService = client.service('messages');
-const usersService = client.service('users');
-
 const Application = () => {
+  const messagesService = client.service('messages');
+  const usersService = client.service('users');
   const [login, setLogin] = useState(null);
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
@@ -41,6 +40,7 @@ const Application = () => {
       ]).then(([messagePage, userPage]) => {
         // We want the latest messages but in the reversed order
         const messagesResult = messagePage.data.reverse();
+        console.log('ooooooooo', messagePage.data);
         const usersResult = userPage.data;
 
         // Once both return, update the state

@@ -1,9 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import client from '../../feathers';
 
 const ChatInput = () => {
-  const chatRef = useRef(null);
-
   function sendMessage(ev) {
     const input = ev.target.querySelector('[name="text"]');
     const text = input.value.trim();
