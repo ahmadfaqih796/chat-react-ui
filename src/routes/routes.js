@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Application from '../App';
-import Chat from '../pages/Chat';
+import UserLayout from '../layouts/UserLayout';
 import ProtectedRoute from './ProtectedRoute';
 
 const router = createBrowserRouter([
@@ -12,7 +12,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/chat/:id_receiver',
-    element: <ProtectedRoute children={<Chat />} />,
+    element: <ProtectedRoute children={<UserLayout />} />,
   },
 ]);
 

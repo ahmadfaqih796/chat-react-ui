@@ -1,7 +1,7 @@
 import React from 'react';
 import client from '../../feathers';
 
-const ChatInput = () => {
+const ChatInput = ({ session }) => {
   function sendMessage(ev) {
     const input = ev.target.querySelector('[name="text"]');
     const text = input.value.trim();
@@ -9,7 +9,11 @@ const ChatInput = () => {
     if (text) {
       client
         .service('messages')
-        .create({ text })
+        .create({
+          text: text,
+          id_sender: session?.id,
+          id_receiver: session?.receiver,
+        })
         .then(() => {
           input.value = '';
         });

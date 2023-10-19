@@ -10,6 +10,10 @@ import React from 'react';
 import client from '../feathers';
 
 const Sidebar = ({ users }) => {
+  const handlePush = (e, item) => {
+    e.preventDefault();
+    window.location.href = `/chat/${item}`;
+  };
   return (
     <List
       sx={{
@@ -23,9 +27,9 @@ const Sidebar = ({ users }) => {
       {users?.map(row => (
         <Grow in={true} key={row.id} timeout={500}>
           <ListItem
-            // onClick={e => {
-            //   handlePush(e, row.id);
-            // }}
+            onClick={e => {
+              handlePush(e, row.id);
+            }}
             sx={{
               background: theme => theme.palette.background.default,
               borderRadius: theme => theme.palette.borderRadius,
