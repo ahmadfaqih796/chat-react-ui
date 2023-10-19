@@ -10,10 +10,10 @@ const router = createBrowserRouter([
     ErrorBoundary: null,
     errorElement: <h1>Error Gan</h1>,
   },
-  // {
-  //   path: '/chat/:id_receiver',
-  //   element: <ProtectedRoute children={<Chat />} />,
-  // },
+  {
+    path: '/chat/:id_receiver',
+    element: <ProtectedRoute children={<Chat />} />,
+  },
 ]);
 
 export default router;

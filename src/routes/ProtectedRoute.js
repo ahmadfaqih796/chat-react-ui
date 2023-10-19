@@ -1,33 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import Login from '../components/auth/Login';
-import client from '../feathers';
 import LoadingSpinner from '../components/loading/LoadingSpinner';
+import client from '../feathers';
 
 const ProtectedRoute = ({ children }) => {
-  const [login, setLogin] = useState(null);
+  const [auth, setAuth] = useState(null);
   const [loading, setLoading] = useState(true);
-  console.log('maaaaaaaasuk', login);
+  console.log('authentication', auth);
 
   useEffect(() => {
-    // Try to authenticate with the JWT stored in localStorage
-    client.authenticate().catch(() => {
-      setLoading(false);
-      setLogin(null);
-    });
-
-    // On logout reset all all local state (which will then show the login screen)
+    client
+      .authenticate()
+      .then(res => {
+        setAuth(res);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+        setAuth(null);
+      });
     client.on('logout', () => {
-      setLogin(null);
+      setAuth(null);
     });
   }, []);
 
   if (loading) {
-    <LoadingSpinner />;
-  } else if (login) {
+    return <LoadingSpinner />;
+  } else if (auth) {
     return children;
   }
-
-  return <Login />;
+  return (window.location.href = '/');
 };
 
 export default ProtectedRoute;
