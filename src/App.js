@@ -2,19 +2,28 @@ import logo from "./logo.svg";
 import "./App.css";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import { AlertContext } from "./context/AlertContext";
 
 function App() {
   const { state, dispatch } = useContext(AuthContext);
+  const { successMessage, errorMessage } = useContext(AlertContext);
 
   const logOut = () => dispatch({ type: "LOGOUT" });
+
   const logIn = () => {
     const userData = {
       user: "John Doe",
       token: "12345abcde",
     };
-    dispatch({ type: "LOGIN", payload: userData });
+    try {
+      successMessage("Login successful!");
+      // errorMessage("Gagal Login");
+      dispatch({ type: "LOGIN", payload: userData });
+    } catch (error) {}
   };
+
   console.log("sasasasas", state);
+
   return (
     <div className="App">
       <header className="App-header">
