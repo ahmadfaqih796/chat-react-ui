@@ -5,15 +5,21 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { AuthProvider } from "./context/AuthContext";
 import { AlertProvider } from "./context/AlertContext";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { theme } from "./theme/theme";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
-  <AlertProvider>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
-  </AlertProvider>
+  <ThemeProvider theme={theme}>
+    {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+    <CssBaseline />
+    <AlertProvider>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </AlertProvider>
+  </ThemeProvider>
   // </React.StrictMode>
 );
 

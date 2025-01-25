@@ -1,9 +1,10 @@
-import ReactBSAlert from "react-bootstrap-sweetalert";
+// import ReactBSAlert from "react-bootstrap-sweetalert";
 
 function SweetAlert({ onConfirm, onCancel, message, type, title, ...props }) {
   console.log("cccccc", type);
   return (
-    <ReactBSAlert
+    <>
+      {/* <ReactBSAlert
       // style={{ display: "block", marginTop: "-100px" }}
       title={title || "Gagal"}
       onConfirm={onConfirm}
@@ -14,7 +15,8 @@ function SweetAlert({ onConfirm, onCancel, message, type, title, ...props }) {
       {...props}
     >
       {message}
-    </ReactBSAlert>
+    </ReactBSAlert> */}
+    </>
   );
 }
 
