@@ -16,7 +16,7 @@ function App() {
       token: "12345abcde",
     };
     try {
-      successMessage("Login successful!");
+      errorMessage("Login successful!");
       // errorMessage("Gagal Login");
       dispatch({ type: "LOGIN", payload: userData });
     } catch (error) {}

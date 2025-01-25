@@ -1,6 +1,7 @@
 import { createContext, useReducer, useState } from "react";
 import { alertReducer, initialState } from "../reducers/alertReducer";
 import SweetAlert from "../components/common/Alert/SweetAlert";
+import MuiAlert from "../components/common/Alert/MuiAlert";
 
 export const AlertContext = createContext();
 
@@ -14,6 +15,7 @@ export const AlertProvider = ({ children }) => {
     dispatch({
       type: "SHOW_ALERT",
       payload: {
+        open: true,
         message: message,
         type: "success",
         title: "Berhasil",
@@ -25,6 +27,7 @@ export const AlertProvider = ({ children }) => {
     dispatch({
       type: "SHOW_ALERT",
       payload: {
+        open: true,
         message: message,
         type: "error",
         title: "Gagal",
@@ -33,25 +36,36 @@ export const AlertProvider = ({ children }) => {
   };
 
   const typeAlert = (x) => {
-    if (x.type === "success") {
-      return (
-        <SweetAlert
-          success
-          title={x.title}
-          onConfirm={closeAlert}
-          message={x.message}
-        />
-      );
-    } else if (x.type === "error") {
-      return (
-        <SweetAlert
-          error
-          title={x.title}
-          onConfirm={closeAlert}
-          message={x.message}
-        />
-      );
-    }
+    console.log("first", x);
+    return (
+      <MuiAlert
+        isOpen={x.isOpen}
+        title={x.title}
+        type={x.type}
+        onConfirm={closeAlert}
+        message={x.message}
+      />
+    );
+    // if (x.type === "success") {
+    //   return (
+    //     <SweetAlert
+    //       success
+    //       open={true}
+    //       title={x.title}
+    //       onConfirm={closeAlert}
+    //       message={x.message}
+    //     />
+    //   );
+    // } else if (x.type === "error") {
+    //   return (
+    //     <SweetAlert
+    //       error
+    //       title={x.title}
+    //       onConfirm={closeAlert}
+    //       message={x.message}
+    //     />
+    //   );
+    // }
   };
   return (
     <AlertContext.Provider value={{ successMessage, errorMessage }}>
