@@ -12,8 +12,7 @@ import ContactApp from "../app/contact";
 import { useAuth } from "../hooks/useAuth";
 
 const AppRoutes = () => {
-  const { user } = useAuth();
-  console.log("kkakakak", user);
+  const { session } = useAuth();
   return (
     <Router>
       <React.Suspense fallback={<div>Loading...</div>}>
@@ -22,14 +21,14 @@ const AppRoutes = () => {
           <Route path="/" element={<Navigate to="/authentication/login" />} />
           <Route
             path="/authentication/login"
-            element={!user ? <LoginApp /> : <Navigate to="/dashboard" />}
+            element={!session ? <LoginApp /> : <Navigate to="/dashboard" />}
           />
 
           {/* Protected Routes */}
           <Route
             path="/dashboard"
             element={
-              user ? <MainLayout /> : <Navigate to="/authentication/login" />
+              session ? <MainLayout /> : <Navigate to="/authentication/login" />
             }
           >
             <Route index element={<DashboardApp />} />

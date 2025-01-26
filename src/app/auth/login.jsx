@@ -1,11 +1,11 @@
 import React from "react";
-import { AlertContext } from "../../context/AlertContext";
+import { useAlert } from "../../hooks/useAlert";
 import { useAuth } from "../../hooks/useAuth";
 import logo from "../../logo.svg";
 
 function LoginApp() {
   const { onLogin } = useAuth();
-  const { successMessage, errorMessage } = React.useContext(AlertContext);
+  const { onAlert } = useAlert();
 
   const logIn = () => {
     const userData = {
@@ -14,9 +14,9 @@ function LoginApp() {
     };
     try {
       onLogin(userData);
-      successMessage("Login successful!");
+      onAlert("success", "Login successful!");
     } catch (error) {
-      errorMessage("Gagal Login");
+      onAlert("error", "Login failed!");
     }
   };
 
