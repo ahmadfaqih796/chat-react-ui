@@ -4,7 +4,7 @@ import { useAuth } from "../../hooks/useAuth";
 import logo from "../../logo.svg";
 
 function LoginApp() {
-  const { state, onLogin } = useAuth();
+  const { onLogin } = useAuth();
   const { successMessage, errorMessage } = React.useContext(AlertContext);
 
   const logIn = () => {
@@ -24,13 +24,6 @@ function LoginApp() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        {state.loggedIn ? (
-          <div>
-            <p>Logged in as: {state.user}</p>
-          </div>
-        ) : (
-          <p>Not logged in</p>
-        )}
         <button onClick={logIn}>Log in</button>
       </header>
     </div>

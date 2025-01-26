@@ -1,6 +1,7 @@
 import { Box, Container, Drawer } from "@mui/material";
 import React from "react";
 import Sidebar from "./Sidebar";
+import { Outlet } from "react-router-dom";
 
 const WIDTH = {
   sidebar: "70px",
@@ -39,7 +40,7 @@ const BaseLayout = () => {
             bgcolor: "blue",
           }}
         >
-          sepuh
+          <Outlet />
         </Box>
         <Box
           sx={{
