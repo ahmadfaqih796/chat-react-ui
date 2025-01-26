@@ -1,12 +1,12 @@
+import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import { AlertContext } from "./context/AlertContext";
 
 function App() {
-  const { state, dispatch } = useContext(AuthContext);
-  const { successMessage, errorMessage } = useContext(AlertContext);
+  const { state, dispatch } = React.useContext(AuthContext);
+  const { successMessage, errorMessage } = React.useContext(AlertContext);
 
   const logOut = () => dispatch({ type: "LOGOUT" });
 
@@ -16,13 +16,12 @@ function App() {
       token: "12345abcde",
     };
     try {
-      errorMessage("Login successful!");
-      // errorMessage("Gagal Login");
+      successMessage("Login successful!");
       dispatch({ type: "LOGIN", payload: userData });
-    } catch (error) {}
+    } catch (error) {
+      errorMessage("Gagal Login");
+    }
   };
-
-  console.log("sasasasas", state);
 
   return (
     <div className="App">

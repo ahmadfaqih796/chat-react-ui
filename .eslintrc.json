@@ -12,6 +12,11 @@
      }
    },
    "plugins": ["react", "react-hooks"],
+   "settings": {
+     "react": {
+       "version": "detect"
+     }
+   },
    "rules": {
      //add customize rules here as per your project's needs
    }

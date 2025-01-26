@@ -1,13 +1,18 @@
-import { createContext, useReducer } from "react";
+import PropTypes from "prop-types";
+import React from "react";
 import { authReducer, initialState } from "../reducers/authReducer";
 
-export const AuthContext = createContext();
+export const AuthContext = React.createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(authReducer, initialState);
+  const [state, dispatch] = React.useReducer(authReducer, initialState);
   return (
     <AuthContext.Provider value={{ state, dispatch }}>
       {children}
     </AuthContext.Provider>
   );
+};
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

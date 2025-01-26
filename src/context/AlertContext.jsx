@@ -1,11 +1,12 @@
-import { createContext, useReducer } from "react";
+import PropTypes from "prop-types";
+import React from "react";
 import MuiAlert from "../components/common/Alert/MuiAlert";
 import { alertReducer, initialState } from "../reducers/alertReducer";
 
-export const AlertContext = createContext();
+export const AlertContext = React.createContext();
 
 export const AlertProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(alertReducer, initialState);
+  const [state, dispatch] = React.useReducer(alertReducer, initialState);
   const closeAlert = () => {
     dispatch({ type: "CLOSE_ALERT" });
   };
@@ -72,4 +73,8 @@ export const AlertProvider = ({ children }) => {
       {children}
     </AlertContext.Provider>
   );
+};
+
+AlertProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
