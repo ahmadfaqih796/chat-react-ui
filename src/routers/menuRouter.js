@@ -5,7 +5,7 @@ export const menuRouter = [
     path: "/chat",
     label: "Chat",
     icon: "MessageOutlined",
-    component: React.lazy(() => import("../app/dashboard")),
+    component: React.lazy(() => import("../app/chat")),
   },
   {
     path: "/contact",

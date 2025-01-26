@@ -1,7 +1,8 @@
-import { Box, Container, Drawer } from "@mui/material";
+import { Box, Drawer } from "@mui/material";
 import React from "react";
-import Sidebar from "./Sidebar";
 import { Outlet } from "react-router-dom";
+import ChatLayout from "./Chat";
+import Sidebar from "./Sidebar";
 
 const WIDTH = {
   sidebar: "70px",
@@ -37,7 +38,7 @@ const BaseLayout = () => {
         <Box
           sx={{
             width: "350px",
-            bgcolor: "blue",
+            p: 1,
           }}
         >
           <Outlet />
@@ -47,20 +48,11 @@ const BaseLayout = () => {
             width: `calc(100% - ${WIDTH.sidebar} - ${WIDTH.content} - ${
               open ? WIDTH.profile : "0px"
             })`,
-            bgcolor: "green",
             transition: "all 0.2s ease-in-out",
+            p: 1,
           }}
         >
-          <Container>
-            <button onClick={handleOpenDrawer}>Open</button>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A
-            voluptatibus ipsum minima. Nulla perferendis quasi quia labore ex!
-            Earum quaerat voluptatibus inventore nihil sunt labore, doloribus
-            ducimus voluptatum fuga ex. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Nihil quasi eligendi praesentium eius velit
-            deserunt libero suscipit enim maiores! Repudiandae quis consequuntur
-            voluptatem earum eligendi, nemo eos atque qui quo.
-          </Container>
+          <ChatLayout onOpenDrawer={() => handleOpenDrawer()} />
           <Drawer
             sx={{
               width: WIDTH.profile,
