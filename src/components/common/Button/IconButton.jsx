@@ -27,10 +27,10 @@ const CartBadge = styled(Badge)`
   }
 `;
 
-const IconButton = ({ children, title, count }) => {
+const IconButton = ({ children, title, count, ...props }) => {
   return (
     <BootstrapTooltip title={title} placement="right">
-      <Button size="small">
+      <Button size="small" {...props}>
         {children}
         {count && count > 0 && (
           <CartBadge badgeContent={count} color="primary" overlap="circular" />

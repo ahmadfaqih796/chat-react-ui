@@ -1,9 +1,15 @@
+import {
+  ContactsSharp,
+  LogoutOutlined,
+  MessageOutlined,
+} from "@mui/icons-material";
 import { Box } from "@mui/material";
 import React from "react";
-import { AccessAlarm, ThreeDRotation } from "@mui/icons-material";
 import IconButton from "../../../common/Button/IconButton";
+import { useAuth } from "../../../../hooks/useAuth";
 
 const Sidebar = () => {
+  const { onLogout } = useAuth();
   return (
     <Box
       sx={{
@@ -12,7 +18,6 @@ const Sidebar = () => {
         flexDirection: "column",
         justifyContent: "space-between",
         backgroundColor: "#fff",
-        border: "1px solid #ccc",
         borderRadius: "10px",
         p: 1,
       }}
@@ -26,11 +31,11 @@ const Sidebar = () => {
           gap: 2,
         }}
       >
-        <IconButton title="Alarm">
-          <AccessAlarm />
+        <IconButton title="Chat">
+          <MessageOutlined fill="#fff" />
         </IconButton>
-        <IconButton>
-          <ThreeDRotation />
+        <IconButton title="Contact">
+          <ContactsSharp />
         </IconButton>
       </Box>
       <Box
@@ -42,8 +47,9 @@ const Sidebar = () => {
           gap: 2,
         }}
       >
-        <img src="https://picsum.photos/40" alt="profile" />
-        <img src="https://picsum.photos/40" alt="profile" />
+        <IconButton title="Logout" onClick={onLogout}>
+          <LogoutOutlined />
+        </IconButton>
       </Box>
     </Box>
   );

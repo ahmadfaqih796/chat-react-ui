@@ -14,6 +14,7 @@ const BaseLayout = () => {
   const handleOpenDrawer = () => {
     setOpen(!open);
   };
+
   return (
     <div>
       <Box
@@ -21,12 +22,25 @@ const BaseLayout = () => {
           display: "flex",
           width: "100vw",
           height: "100vh",
+          bgcolor: "#bae0ff",
         }}
       >
-        <Box sx={{ width: "70px", p: 1 }}>
+        <Box
+          sx={{
+            width: WIDTH.sidebar,
+            p: 1,
+          }}
+        >
           <Sidebar />
         </Box>
-        <Box sx={{ width: "350px", bgcolor: "blue" }}>sepuh</Box>
+        <Box
+          sx={{
+            width: "350px",
+            bgcolor: "blue",
+          }}
+        >
+          sepuh
+        </Box>
         <Box
           sx={{
             width: `calc(100% - ${WIDTH.sidebar} - ${WIDTH.content} - ${
