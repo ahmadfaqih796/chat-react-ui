@@ -7,9 +7,16 @@ import { Box } from "@mui/material";
 import React from "react";
 import IconButton from "../../../common/Button/IconButton";
 import { useAuth } from "../../../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const { onLogout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleClick = (link) => {
+    navigate(link);
+  };
+
   return (
     <Box
       sx={{
@@ -31,10 +38,13 @@ const Sidebar = () => {
           gap: 2,
         }}
       >
-        <IconButton title="Chat">
+        <IconButton title="Chat" onClick={() => handleClick("/chat")}>
           <MessageOutlined fill="#fff" />
         </IconButton>
-        <IconButton title="Contact">
+        <IconButton
+          title="Contact"
+          onClick={() => handleClick("/chat/contact")}
+        >
           <ContactsSharp />
         </IconButton>
       </Box>
