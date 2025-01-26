@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { AuthProvider } from "./context/AuthContext";
 import { AlertProvider } from "./context/AlertContext";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import theme from "./components/layouts/theme";
+import theme from "./components/layout/theme";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

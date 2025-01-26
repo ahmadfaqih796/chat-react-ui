@@ -6,7 +6,7 @@ import {
   Routes,
 } from "react-router-dom";
 import LoginApp from "../app/auth/login";
-import DashboardApp from "../app/dashboard";
+import MainLayout from "../components/layout/MainLayout";
 
 const AppRoutes = () => {
   const user = false;
@@ -15,7 +15,7 @@ const AppRoutes = () => {
       <React.Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<LoginApp />} />
-          <Route path="/dashboard" element={<DashboardApp />} />
+          <Route path="/dashboard" element={<MainLayout />} />
           <Route
             path="/authentication/login"
             element={!user ? <LoginApp /> : <Navigate to="/dashboard" />}
