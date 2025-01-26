@@ -1,15 +1,11 @@
 import React from "react";
-import logo from "../../logo.svg";
-import { AuthContext } from "../../context/AuthContext";
 import { AlertContext } from "../../context/AlertContext";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import logo from "../../logo.svg";
 
 function LoginApp() {
-  const { state, dispatch } = React.useContext(AuthContext);
+  const { state, onLogin } = useAuth();
   const { successMessage, errorMessage } = React.useContext(AlertContext);
-  const navigate = useNavigate();
-
-  const logOut = () => dispatch({ type: "LOGOUT" });
 
   const logIn = () => {
     const userData = {
@@ -17,9 +13,8 @@ function LoginApp() {
       token: "12345abcde",
     };
     try {
+      onLogin(userData);
       successMessage("Login successful!");
-      dispatch({ type: "LOGIN", payload: userData });
-      navigate("/dashboard");
     } catch (error) {
       errorMessage("Gagal Login");
     }
@@ -32,7 +27,6 @@ function LoginApp() {
         {state.loggedIn ? (
           <div>
             <p>Logged in as: {state.user}</p>
-            <button onClick={logOut}>Log out</button>
           </div>
         ) : (
           <p>Not logged in</p>
