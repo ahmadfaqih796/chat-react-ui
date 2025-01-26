@@ -1,7 +1,6 @@
-import { createContext, useReducer, useState } from "react";
-import { alertReducer, initialState } from "../reducers/alertReducer";
-import SweetAlert from "../components/common/Alert/SweetAlert";
+import { createContext, useReducer } from "react";
 import MuiAlert from "../components/common/Alert/MuiAlert";
+import { alertReducer, initialState } from "../reducers/alertReducer";
 
 export const AlertContext = createContext();
 

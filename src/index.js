@@ -6,13 +6,12 @@ import reportWebVitals from "./reportWebVitals";
 import { AuthProvider } from "./context/AuthContext";
 import { AlertProvider } from "./context/AlertContext";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { theme } from "./theme/theme";
+import theme from "./components/layouts/theme";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
   <ThemeProvider theme={theme}>
-    {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
     <CssBaseline />
     <AlertProvider>
       <AuthProvider>
