@@ -2,10 +2,12 @@ import React from "react";
 import logo from "../../logo.svg";
 import { AuthContext } from "../../context/AuthContext";
 import { AlertContext } from "../../context/AlertContext";
+import { useNavigate } from "react-router-dom";
 
 function LoginApp() {
   const { state, dispatch } = React.useContext(AuthContext);
   const { successMessage, errorMessage } = React.useContext(AlertContext);
+  const navigate = useNavigate();
 
   const logOut = () => dispatch({ type: "LOGOUT" });
 
@@ -17,6 +19,7 @@ function LoginApp() {
     try {
       successMessage("Login successful!");
       dispatch({ type: "LOGIN", payload: userData });
+      navigate("/dashboard");
     } catch (error) {
       errorMessage("Gagal Login");
     }
