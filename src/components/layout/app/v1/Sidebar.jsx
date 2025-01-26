@@ -5,17 +5,12 @@ import {
 } from "@mui/icons-material";
 import { Box } from "@mui/material";
 import React from "react";
-import IconButton from "../../../common/Button/IconButton";
+import { NavLink } from "react-router-dom";
 import { useAuth } from "../../../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import IconButton from "../../../common/Button/IconButton";
 
 const Sidebar = () => {
   const { onLogout } = useAuth();
-  const navigate = useNavigate();
-
-  const handleClick = (link) => {
-    navigate(link);
-  };
 
   return (
     <Box
@@ -38,15 +33,36 @@ const Sidebar = () => {
           gap: 2,
         }}
       >
-        <IconButton title="Chat" onClick={() => handleClick("/chat")}>
-          <MessageOutlined fill="#fff" />
-        </IconButton>
-        <IconButton
-          title="Contact"
-          onClick={() => handleClick("/chat/contact")}
+        {/* {menuRouter.map(({ path, label, icon: Icon }) => (
+          <NavLink
+            key={path}
+            to={path}
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            <IconButton title={label}>
+              {Icon &&
+                React.createElement(require("@mui/icons-material")[Icon], {
+                  color: "primary",
+                })}
+            </IconButton>
+          </NavLink>
+        ))} */}
+        <NavLink
+          to="/chat"
+          className={({ isActive }) => (isActive ? "active" : "")}
         >
-          <ContactsSharp />
-        </IconButton>
+          <IconButton title="Chat">
+            <MessageOutlined color="primary" />
+          </IconButton>
+        </NavLink>
+        <NavLink
+          to="/contact"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
+          <IconButton title="Contact">
+            <ContactsSharp color="primary" />
+          </IconButton>
+        </NavLink>
       </Box>
       <Box
         sx={{

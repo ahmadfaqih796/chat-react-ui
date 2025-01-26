@@ -6,11 +6,10 @@ import {
   Routes,
 } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { menuRouter } from "./menuRouter";
 
 const LoginApp = lazy(() => import("../app/auth/login"));
 const MainLayout = lazy(() => import("../components/layout/MainLayout"));
-const DashboardApp = lazy(() => import("../app/dashboard"));
-const ContactApp = lazy(() => import("../app/contact"));
 
 const AppRoutes = () => {
   const { session } = useAuth();
@@ -28,13 +27,14 @@ const AppRoutes = () => {
 
           {/* Protected Routes */}
           <Route
-            path="/chat"
+            path="/"
             element={
               session ? <MainLayout /> : <Navigate to="/authentication/login" />
             }
           >
-            <Route index element={<DashboardApp />} />
-            <Route path="contact" element={<ContactApp />} />
+            {menuRouter.map(({ path, component: Component }) => (
+              <Route key={path} path={path} element={<Component />} />
+            ))}
           </Route>
         </Routes>
       </Suspense>
