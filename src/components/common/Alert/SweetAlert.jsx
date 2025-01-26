@@ -1,7 +1,6 @@
 // import ReactBSAlert from "react-bootstrap-sweetalert";
 
 function SweetAlert({ onConfirm, onCancel, message, type, title, ...props }) {
-  console.log("cccccc", type);
   return (
     <>
       {/* <ReactBSAlert
