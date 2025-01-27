@@ -8,7 +8,7 @@ import {
 // import { useAuth } from "../hooks/useAuth";
 import { menuRouter } from "./menuRouter";
 
-const LoginApp = lazy(() => import("../app/auth/login"));
+const LoginApp = lazy(() => import("../pages/auth/login"));
 const MainLayout = lazy(() => import("../components/layout/MainLayout"));
 
 const AppRoutes = () => {
