@@ -5,14 +5,15 @@ import {
   BrowserRouter as Router,
   Routes,
 } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+// import { useAuth } from "../hooks/useAuth";
 import { menuRouter } from "./menuRouter";
 
 const LoginApp = lazy(() => import("../app/auth/login"));
 const MainLayout = lazy(() => import("../components/layout/MainLayout"));
 
 const AppRoutes = () => {
-  const { session } = useAuth();
+  // const { session } = useAuth();
+  const session = true;
 
   return (
     <Router>
@@ -32,6 +33,8 @@ const AppRoutes = () => {
               session ? <MainLayout /> : <Navigate to="/authentication/login" />
             }
           >
+            {/* <Route path="/chat" element={<div>ChatApp</div>} />
+            <Route path="/contact" element={<div>ContactApp</div>} /> */}
             {menuRouter.map(({ path, component: Component }) => (
               <Route key={path} path={path} element={<Component />} />
             ))}
