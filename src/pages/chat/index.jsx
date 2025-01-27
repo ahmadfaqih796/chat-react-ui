@@ -1,5 +1,6 @@
-import { Box } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 import React from "react";
+import ChatHeader from "./components/ChatHeader";
 
 const ChatApp = () => {
   return (
@@ -8,13 +9,13 @@ const ChatApp = () => {
         height: "100%",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between",
+        // justifyContent: "space-between",
         backgroundColor: "#fff",
         borderRadius: "10px",
-        p: 1,
       }}
     >
-      ChatApp xxx
+      <ChatHeader />
+      <Divider />
     </Box>
   );
 };
