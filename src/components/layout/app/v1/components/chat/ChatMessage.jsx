@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Chip, Divider, Typography } from "@mui/material";
 import React from "react";
 import { DUMMY_MESSAGES } from "./dummy";
 import moment from "moment";
@@ -23,7 +23,7 @@ const ChatMessage = () => {
     );
   };
   return (
-    <Box sx={{ height: "80%", pl: 2 }}>
+    <Box sx={{ height: "calc(100% - 70px - 70px)", pl: 2 }}>
       {Array.isArray(data) && data.length > 0 ? (
         <Box
           ref={scrollRef}
@@ -48,15 +48,11 @@ const ChatMessage = () => {
             >
               {index === 0 ||
               isDifferentDate(data[index - 1].created_at, item.created_at) ? (
-                <Typography
-                  variant="h5"
-                  color="textSecondary"
-                  sx={{
-                    textAlign: "center",
-                  }}
-                >
-                  {moment(item.created_at).format("D MMMM YYYY")}
-                </Typography>
+                <Divider sx={{ my: 1 }}>
+                  <Chip
+                    label={moment(item.created_at).format("DD MMMM YYYY")}
+                  />
+                </Divider>
               ) : null}
               <Box
                 sx={{

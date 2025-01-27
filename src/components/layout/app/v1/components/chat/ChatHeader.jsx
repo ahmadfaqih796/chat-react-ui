@@ -10,6 +10,7 @@ const ChatHeader = ({ onOpenDrawer }) => {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
+        height: "70px",
         p: 1,
       }}
     >

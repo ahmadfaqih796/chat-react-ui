@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import ChatHeader from "./components/chat/ChatHeader";
 import ChatMessage from "./components/chat/ChatMessage";
+import ChatForm from "./components/chat/ChatForm";
 const ChatLayout = ({ onOpenDrawer }) => {
   return (
     <Box
@@ -17,6 +18,8 @@ const ChatLayout = ({ onOpenDrawer }) => {
       <ChatHeader onOpenDrawer={onOpenDrawer} />
       <Divider />
       <ChatMessage />
+      <Divider />
+      <ChatForm />
     </Box>
   );
 };
