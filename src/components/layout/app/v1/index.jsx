@@ -3,6 +3,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import ChatLayout from "./Chat";
 import Sidebar from "./Sidebar";
+import Profile from "./Profile";
 
 const WIDTH = {
   sidebar: "70px",
@@ -58,7 +59,9 @@ const BaseLayout = () => {
               width: WIDTH.profile,
               flexShrink: 0,
               "& .MuiDrawer-paper": {
-                background: "yellow",
+                border: "none",
+                background: "#bae0ff",
+                p: 1,
                 width: WIDTH.profile,
                 boxSizing: "border-box",
               },
@@ -67,7 +70,7 @@ const BaseLayout = () => {
             anchor="right"
             open={open}
           >
-            sasasa
+            <Profile onClose={() => handleOpenDrawer()} />
           </Drawer>
         </Box>
       </Box>
