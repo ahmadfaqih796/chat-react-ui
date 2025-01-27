@@ -1,6 +1,7 @@
 import { Box, Divider } from "@mui/material";
 import React from "react";
 import ChatHeader from "./components/ChatHeader";
+import ChatList from "./components/ChatList";
 
 const ChatApp = () => {
   return (
@@ -16,6 +17,7 @@ const ChatApp = () => {
     >
       <ChatHeader />
       <Divider />
+      <ChatList />
     </Box>
   );
 };
