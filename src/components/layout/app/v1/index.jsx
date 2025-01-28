@@ -89,7 +89,7 @@ const BaseLayout = () => {
               isOpenChat && isMobile ? "translateX(-100%)" : "translateX(0)",
           }}
         >
-          <Outlet />
+          <Outlet context={{ onOpen: handleOpenChat }} />
         </Box>
         <Box
           sx={{
@@ -104,8 +104,7 @@ const BaseLayout = () => {
                   open && isDesktop ? WIDTH.profile : "0px"
                 })`,
             transition: "all 0.5s ease-in-out",
-            transform:
-              isOpenChat && isMobile ? "translateX(-100%)" : "translateX(0)",
+            transform: isOpenChat && isMobile ? "translateX(-100%)" : "none",
             p: 1,
           }}
         >

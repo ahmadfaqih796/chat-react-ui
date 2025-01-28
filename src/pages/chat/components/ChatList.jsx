@@ -3,24 +3,23 @@ import { USER_LIST } from "./userDummy";
 import { Avatar, Box, TextField, Typography } from "@mui/material";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import CheckIcon from "@mui/icons-material/Check";
+import PropTypes from "prop-types";
+import { useOutletContext } from "react-router-dom";
 
 const ChatList = () => {
-  const ref = React.useRef(null);
+  const { onOpen } = useOutletContext();
   const [search, setSearch] = React.useState("");
   const data = USER_LIST;
 
-  const filterData = data.filter((item) => {
-    return item.name.toLowerCase().includes(search.toLowerCase());
-  });
+  const filterData = React.useMemo(() => {
+    return data.filter((item) =>
+      item.name.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [search, data]);
 
-  const handleScroll = () => {
-    if (ref.current) {
-      ref.current.scrollBy({
-        left: ref.current.clientWidth,
-        behavior: "smooth",
-      });
-    }
-  };
+  const handleOpen = React.useCallback(() => {
+    onOpen();
+  }, [onOpen]);
 
   return (
     <Box
@@ -70,7 +69,7 @@ const ChatList = () => {
               cursor: "pointer",
               borderRadius: "10px",
             }}
-            onClick={() => handleScroll()}
+            onClick={handleOpen}
           >
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Avatar
@@ -124,6 +123,10 @@ const ChatList = () => {
       </Box>
     </Box>
   );
+};
+
+ChatList.propTypes = {
+  onOpen: PropTypes.func,
 };
 
 export default ChatList;
