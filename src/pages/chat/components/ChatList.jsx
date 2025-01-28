@@ -5,12 +5,23 @@ import DoneAllIcon from "@mui/icons-material/DoneAll";
 import CheckIcon from "@mui/icons-material/Check";
 
 const ChatList = () => {
+  const ref = React.useRef(null);
   const [search, setSearch] = React.useState("");
   const data = USER_LIST;
 
   const filterData = data.filter((item) => {
     return item.name.toLowerCase().includes(search.toLowerCase());
   });
+
+  const handleScroll = () => {
+    if (ref.current) {
+      ref.current.scrollBy({
+        left: ref.current.clientWidth,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -59,6 +70,7 @@ const ChatList = () => {
               cursor: "pointer",
               borderRadius: "10px",
             }}
+            onClick={() => handleScroll()}
           >
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Avatar

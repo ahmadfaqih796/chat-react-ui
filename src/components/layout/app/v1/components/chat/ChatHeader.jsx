@@ -1,9 +1,10 @@
 import { Box, Avatar, IconButton, Typography } from "@mui/material";
 import React from "react";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import PropTypes from "prop-types";
 
-const ChatHeader = ({ onOpenDrawer }) => {
+const ChatHeader = ({ onOpenDrawer, onClose, isMobile }) => {
   return (
     <Box
       sx={{
@@ -43,6 +44,11 @@ const ChatHeader = ({ onOpenDrawer }) => {
           <Typography variant="caption">Chat</Typography>
         </Box>
       </button>
+      {isMobile && (
+        <IconButton onClick={() => onClose()}>
+          <ArrowBackIcon />
+        </IconButton>
+      )}
       <IconButton>
         <MoreVertIcon />
       </IconButton>
@@ -51,6 +57,8 @@ const ChatHeader = ({ onOpenDrawer }) => {
 };
 
 ChatHeader.propTypes = {
+  isMobile: PropTypes.bool,
+  onClose: PropTypes.func,
   onOpenDrawer: PropTypes.func,
 };
 

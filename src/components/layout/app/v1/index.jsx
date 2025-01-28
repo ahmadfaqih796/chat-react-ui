@@ -1,3 +1,4 @@
+import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
   Box,
@@ -11,9 +12,8 @@ import {
 import React from "react";
 import { Outlet } from "react-router-dom";
 import ChatLayout from "./Chat";
-import Sidebar from "./Sidebar";
 import Profile from "./Profile";
-import MenuIcon from "@mui/icons-material/Menu";
+import Sidebar from "./Sidebar";
 
 const WIDTH = {
   sidebar: "70px",
@@ -23,12 +23,17 @@ const WIDTH = {
 
 const BaseLayout = () => {
   const [open, setOpen] = React.useState(false);
+  const [isOpenChat, setIsOpenChat] = React.useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));
 
   const handleOpenDrawer = () => {
     setOpen(!open);
+  };
+
+  const handleOpenChat = () => {
+    setIsOpenChat(!isOpenChat);
   };
 
   return (
@@ -44,13 +49,12 @@ const BaseLayout = () => {
               color="inherit"
               aria-label="open drawer"
               edge="start"
-              // onClick={toggleDrawer}
-              // className={classes.menuButton}
+              onClick={() => handleOpenChat()}
             >
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
-              Chat
+              Chatvvv
             </Typography>
           </Toolbar>
         </AppBar>
@@ -62,7 +66,8 @@ const BaseLayout = () => {
           width: "100vw",
           height: "100vh",
           bgcolor: "#f0f5ff",
-          overflowX: "auto",
+          overflowX: "hidden",
+          scrollbarWidth: "none",
         }}
       >
         <Box
@@ -79,6 +84,9 @@ const BaseLayout = () => {
             width: isMobile ? "100vw" : "350px",
             minWidth: isMobile ? "100%" : "350px",
             p: 1,
+            transition: "all 0.5s ease-in-out",
+            transform:
+              isOpenChat && isMobile ? "translateX(-100%)" : "translateX(0)",
           }}
         >
           <Outlet />
@@ -95,11 +103,17 @@ const BaseLayout = () => {
               : `calc(100% - ${WIDTH.sidebar} - ${WIDTH.content} - ${
                   open && isDesktop ? WIDTH.profile : "0px"
                 })`,
-            transition: "all 0.2s ease-in-out",
+            transition: "all 0.5s ease-in-out",
+            transform:
+              isOpenChat && isMobile ? "translateX(-100%)" : "translateX(0)",
             p: 1,
           }}
         >
-          <ChatLayout onOpenDrawer={() => handleOpenDrawer()} />
+          <ChatLayout
+            isMobile={isMobile}
+            onClose={() => handleOpenChat()}
+            onOpenDrawer={() => handleOpenDrawer()}
+          />
           <Drawer
             sx={{
               width: WIDTH.profile,
