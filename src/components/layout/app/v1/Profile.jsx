@@ -1,7 +1,8 @@
-import { Box } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 import React from "react";
 import ProfileHeader from "./components/profile/ProfileHeader";
 import PropTypes from "prop-types";
+import ProfileContent from "./components/profile/ProfileContent";
 
 const Profile = ({ onClose }) => {
   return (
@@ -15,6 +16,8 @@ const Profile = ({ onClose }) => {
       }}
     >
       <ProfileHeader onClose={onClose} />
+      <Divider />
+      <ProfileContent />
     </Box>
   );
 };

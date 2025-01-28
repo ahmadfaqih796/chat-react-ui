@@ -123,10 +123,13 @@ const BaseLayout = () => {
               "& .MuiDrawer-paper": {
                 border: "none",
                 background: isDesktop ? "transparent" : "#fff",
-                p: 1,
                 width: WIDTH.profile,
                 boxSizing: "border-box",
               },
+            }}
+            transitionDuration={{
+              enter: 700,
+              exit: 500,
             }}
             variant={isDesktop ? "persistent" : "temporary"}
             anchor="right"

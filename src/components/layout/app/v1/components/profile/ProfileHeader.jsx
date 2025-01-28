@@ -34,7 +34,6 @@ const ProfileHeader = ({ onClose }) => {
           }}
         >
           <Typography variant="body1">Info Kontak</Typography>
-          <Typography variant="caption">Ahmad Faqih Arifin</Typography>
         </Box>
       </button>
       <IconButton onClick={() => onClose()}>
