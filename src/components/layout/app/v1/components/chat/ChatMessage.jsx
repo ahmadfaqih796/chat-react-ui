@@ -34,8 +34,20 @@ const ChatMessage = () => {
             paddingRight: "10px",
             flexDirection: "column",
             scrollBehavior: "smooth",
-            scrollbarWidth: "thin",
-            scrollbarColor: "rgba(0, 0, 0, 0.2) transparent",
+            // scrollbarWidth: "thin",
+            // scrollbarColor: "rgba(0, 0, 0, 0.2) transparent",
+            "&::-webkit-scrollbar": {
+              width: "5px",
+            },
+            // "&::-webkit-scrollbar-track": {
+            //   background: "#f1f1f1",
+            // },
+            "&::-webkit-scrollbar-thumb": {
+              background: "#888",
+            },
+            // "&::-webkit-scrollbar-thumb:hover": {
+            //   background: "#555",
+            // },
           }}
         >
           {data?.map((item, index) => (
