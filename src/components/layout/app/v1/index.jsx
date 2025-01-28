@@ -61,7 +61,7 @@ const BaseLayout = () => {
           display: "flex",
           width: "100vw",
           height: "100vh",
-          bgcolor: "#bae0ff",
+          bgcolor: "#f0f5ff",
           overflowX: "auto",
         }}
       >
@@ -106,7 +106,7 @@ const BaseLayout = () => {
               flexShrink: 0,
               "& .MuiDrawer-paper": {
                 border: "none",
-                background: isDesktop ? "#bae0ff" : "#fff",
+                background: isDesktop ? "#f0f5ff" : "#fff",
                 p: 1,
                 width: WIDTH.profile,
                 boxSizing: "border-box",

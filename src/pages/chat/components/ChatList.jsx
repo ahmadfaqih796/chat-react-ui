@@ -1,6 +1,8 @@
 import React from "react";
 import { USER_LIST } from "./userDummy";
-import { Box, TextField } from "@mui/material";
+import { Avatar, Box, TextField, Typography } from "@mui/material";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
+import CheckIcon from "@mui/icons-material/Check";
 
 const ChatList = () => {
   const [search, setSearch] = React.useState("");
@@ -12,7 +14,8 @@ const ChatList = () => {
   return (
     <Box
       sx={{
-        p: 2,
+        px: 2,
+        height: "calc(100% - 70px)",
       }}
     >
       <TextField
@@ -22,7 +25,7 @@ const ChatList = () => {
         size="small"
         fullWidth
         sx={{
-          mt: 1,
+          my: 2,
           "& .MuiOutlinedInput-root": {
             borderRadius: "10px",
             overflow: "hidden",
@@ -30,9 +33,83 @@ const ChatList = () => {
         }}
         onChange={(e) => setSearch(e.target.value)}
       />
-      {filterData.map((item) => (
-        <div key={item.id}>{item.name}</div>
-      ))}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+          height: "calc(100% - 90px)",
+          overflowY: "auto",
+          scrollbarWidth: "none",
+          borderRadius: "10px",
+        }}
+      >
+        {filterData.map((item) => (
+          <button
+            key={item.id}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: 5,
+              padding: "10px",
+              width: "100%",
+              border: "none",
+              backgroundColor: "#f0f5ff",
+              cursor: "pointer",
+              borderRadius: "10px",
+            }}
+          >
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Avatar
+                sx={{
+                  bgcolor: "#2f54eb",
+                  width: "40px",
+                  height: "40px",
+                  mr: 1,
+                }}
+                aria-label="recipe"
+              >
+                {item.name.charAt(0).toUpperCase()}
+              </Avatar>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                }}
+              >
+                <Typography variant="body1">{item.name}</Typography>
+                <Typography variant="caption">{item.last_message}</Typography>
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                alignItems: "flex-end",
+                height: "100%",
+                gap: 2,
+              }}
+            >
+              <Box
+                sx={{
+                  width: "8px",
+                  height: "8px",
+                  bgcolor: "green",
+                  borderRadius: "50%",
+                }}
+              />
+              {item.is_read ? (
+                <DoneAllIcon sx={{ fontSize: "15px" }} color="success" />
+              ) : (
+                <CheckIcon sx={{ fontSize: "15px" }} color="disabled" />
+              )}
+            </Box>
+          </button>
+        ))}
+      </Box>
     </Box>
   );
 };
