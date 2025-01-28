@@ -1,10 +1,14 @@
 import { Box, Divider } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
+import ChatBlank from "./components/chat/ChatBlank";
+import ChatForm from "./components/chat/ChatForm";
 import ChatHeader from "./components/chat/ChatHeader";
 import ChatMessage from "./components/chat/ChatMessage";
-import ChatForm from "./components/chat/ChatForm";
 const ChatLayout = ({ data, onOpenDrawer, onClose, isMobile }) => {
+  if (!data) {
+    return <ChatBlank />;
+  }
   return (
     <Box
       sx={{
