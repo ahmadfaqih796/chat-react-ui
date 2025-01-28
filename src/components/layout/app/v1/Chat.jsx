@@ -4,7 +4,7 @@ import React from "react";
 import ChatHeader from "./components/chat/ChatHeader";
 import ChatMessage from "./components/chat/ChatMessage";
 import ChatForm from "./components/chat/ChatForm";
-const ChatLayout = ({ onOpenDrawer, onClose, isMobile }) => {
+const ChatLayout = ({ data, onOpenDrawer, onClose, isMobile }) => {
   return (
     <Box
       sx={{
@@ -16,6 +16,7 @@ const ChatLayout = ({ onOpenDrawer, onClose, isMobile }) => {
       }}
     >
       <ChatHeader
+        data={data}
         onClose={onClose}
         onOpenDrawer={onOpenDrawer}
         isMobile={isMobile}
@@ -29,6 +30,7 @@ const ChatLayout = ({ onOpenDrawer, onClose, isMobile }) => {
 };
 
 ChatLayout.propTypes = {
+  data: PropTypes.object,
   isMobile: PropTypes.bool,
   onClose: PropTypes.func,
   onOpenDrawer: PropTypes.func,

@@ -36,7 +36,6 @@ export const AlertProvider = ({ children }) => {
   };
 
   const typeAlert = (x) => {
-    console.log("first", x);
     return (
       <MuiAlert
         isOpen={x.isOpen}

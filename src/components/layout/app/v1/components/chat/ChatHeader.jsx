@@ -4,7 +4,13 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import PropTypes from "prop-types";
 
-const ChatHeader = ({ onOpenDrawer, onClose, isMobile }) => {
+const ChatHeader = ({ data, onOpenDrawer, onClose, isMobile }) => {
+  const handleClose = React.useCallback(
+    (item) => {
+      onClose(item);
+    },
+    [onClose]
+  );
   return (
     <Box
       sx={{
@@ -40,12 +46,12 @@ const ChatHeader = ({ onOpenDrawer, onClose, isMobile }) => {
             alignItems: "flex-start",
           }}
         >
-          <Typography variant="body1">Ahmad Faqih Arifin</Typography>
+          <Typography variant="body1">{data?.name || "Anonymous"}</Typography>
           <Typography variant="caption">Chat</Typography>
         </Box>
       </button>
       {isMobile && (
-        <IconButton onClick={() => onClose()}>
+        <IconButton onClick={() => handleClose(data)}>
           <ArrowBackIcon />
         </IconButton>
       )}
@@ -57,6 +63,7 @@ const ChatHeader = ({ onOpenDrawer, onClose, isMobile }) => {
 };
 
 ChatHeader.propTypes = {
+  data: PropTypes.object,
   isMobile: PropTypes.bool,
   onClose: PropTypes.func,
   onOpenDrawer: PropTypes.func,

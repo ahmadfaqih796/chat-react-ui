@@ -17,9 +17,12 @@ const ChatList = () => {
     );
   }, [search, data]);
 
-  const handleOpen = React.useCallback(() => {
-    onOpen();
-  }, [onOpen]);
+  const handleOpen = React.useCallback(
+    (field) => {
+      onOpen(field);
+    },
+    [onOpen]
+  );
 
   return (
     <Box
@@ -69,7 +72,7 @@ const ChatList = () => {
               cursor: "pointer",
               borderRadius: "10px",
             }}
-            onClick={handleOpen}
+            onClick={() => handleOpen(item)}
           >
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Avatar

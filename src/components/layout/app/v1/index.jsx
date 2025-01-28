@@ -23,6 +23,7 @@ const WIDTH = {
 
 const BaseLayout = () => {
   const [open, setOpen] = React.useState(false);
+  const [user, setUser] = React.useState(null);
   const [isOpenChat, setIsOpenChat] = React.useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -32,7 +33,8 @@ const BaseLayout = () => {
     setOpen(!open);
   };
 
-  const handleOpenChat = () => {
+  const handleOpenChat = (data) => {
+    setUser(data);
     setIsOpenChat(!isOpenChat);
   };
 
@@ -54,7 +56,7 @@ const BaseLayout = () => {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
-              Chatvvv
+              Chat Data
             </Typography>
           </Toolbar>
         </AppBar>
@@ -65,7 +67,7 @@ const BaseLayout = () => {
           display: "flex",
           width: "100vw",
           height: "100vh",
-          bgcolor: "#f0f5ff",
+          background: "linear-gradient(45deg, #f0f5ff 30%, #adc6ff 90%)",
           overflowX: "hidden",
           scrollbarWidth: "none",
         }}
@@ -109,8 +111,9 @@ const BaseLayout = () => {
           }}
         >
           <ChatLayout
+            data={user}
             isMobile={isMobile}
-            onClose={() => handleOpenChat()}
+            onClose={(x) => handleOpenChat(x)}
             onOpenDrawer={() => handleOpenDrawer()}
           />
           <Drawer
@@ -119,7 +122,7 @@ const BaseLayout = () => {
               flexShrink: 0,
               "& .MuiDrawer-paper": {
                 border: "none",
-                background: isDesktop ? "#f0f5ff" : "#fff",
+                background: isDesktop ? "transparent" : "#fff",
                 p: 1,
                 width: WIDTH.profile,
                 boxSizing: "border-box",

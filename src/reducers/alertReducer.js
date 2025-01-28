@@ -6,7 +6,6 @@ export const initialState = {
 };
 
 export function alertReducer(state = initialState, action) {
-  console.log("aaaaaa", action);
   switch (action.type) {
     case "SHOW_ALERT":
       return {
