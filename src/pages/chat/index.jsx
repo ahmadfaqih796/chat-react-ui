@@ -1,6 +1,7 @@
-import { Box, Divider } from "@mui/material";
+import AddCommentIcon from "@mui/icons-material/AddComment";
+import { Box, Divider, IconButton } from "@mui/material";
 import React from "react";
-import ChatHeader from "./components/ChatHeader";
+import PageHeader from "../../components/widget/PageHeader";
 import ChatList from "./components/ChatList";
 
 const ChatApp = () => {
@@ -15,7 +16,13 @@ const ChatApp = () => {
         borderRadius: "10px",
       }}
     >
-      <ChatHeader />
+      <PageHeader
+        action={
+          <IconButton>
+            <AddCommentIcon />
+          </IconButton>
+        }
+      />
       <Divider />
       <ChatList />
     </Box>

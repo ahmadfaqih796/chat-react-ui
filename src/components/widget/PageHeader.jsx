@@ -1,7 +1,7 @@
-import AddCommentIcon from "@mui/icons-material/AddComment";
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import PropTypes from "prop-types";
 import React from "react";
-const ChatHeader = () => {
+const PageHeader = ({ action }) => {
   return (
     <Box
       sx={{
@@ -30,14 +30,16 @@ const ChatHeader = () => {
             alignItems: "flex-start",
           }}
         >
-          <Typography variant="h5">Chat</Typography>
+          <Typography variant="h5">PageHeader</Typography>
         </Box>
       </button>
-      <IconButton>
-        <AddCommentIcon />
-      </IconButton>
+      {action}
     </Box>
   );
 };
 
-export default ChatHeader;
+PageHeader.propTypes = {
+  action: PropTypes.node,
+};
+
+export default PageHeader;
