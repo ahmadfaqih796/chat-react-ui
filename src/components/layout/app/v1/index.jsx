@@ -91,7 +91,7 @@ const BaseLayout = () => {
               isOpenChat && isMobile ? "translateX(-100%)" : "translateX(0)",
           }}
         >
-          <Outlet context={{ onOpen: handleOpenChat }} />
+          <Outlet context={{ onOpen: handleOpenChat, user: user }} />
         </Box>
         <Box
           sx={{
@@ -123,6 +123,7 @@ const BaseLayout = () => {
               "& .MuiDrawer-paper": {
                 border: "none",
                 background: isDesktop ? "transparent" : "#fff",
+                p: isDesktop ? 1 : 0,
                 width: WIDTH.profile,
                 boxSizing: "border-box",
               },

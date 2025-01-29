@@ -7,8 +7,10 @@ import PropTypes from "prop-types";
 import { useOutletContext } from "react-router-dom";
 
 const ChatList = () => {
-  const { onOpen } = useOutletContext();
+  const { onOpen, user } = useOutletContext();
+
   const [search, setSearch] = React.useState("");
+  const [chatId, setChatId] = React.useState(user?.id);
   const data = USER_LIST;
 
   const filterData = React.useMemo(() => {
@@ -19,9 +21,10 @@ const ChatList = () => {
 
   const handleOpen = React.useCallback(
     (field) => {
+      setChatId(field.id);
       onOpen(field);
     },
-    [onOpen]
+    [onOpen, setChatId]
   );
 
   return (
@@ -68,7 +71,7 @@ const ChatList = () => {
               padding: "10px",
               width: "100%",
               border: "none",
-              backgroundColor: "#f0f5ff",
+              backgroundColor: chatId === item.id ? "#adc6ff" : "#f0f5ff",
               cursor: "pointer",
               borderRadius: "10px",
             }}
