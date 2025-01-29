@@ -1,28 +1,13 @@
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import { Box, Divider, IconButton } from "@mui/material";
 import React from "react";
+import Motion from "../../components/widget/Motion";
 import PageHeader from "../../components/widget/PageHeader";
 import ChatList from "./components/ChatList";
-import { motion } from "motion/react";
 
 const ChatApp = () => {
-  const transition = {
-    duration: 2,
-    delay: 0,
-    // ease: [0, 0.71, 0.2, 1.01],
-  };
   return (
-    <motion.div
-      initial={{ opacity: 0, transform: "translateY(-100%)" }}
-      animate={{ opacity: 1, transform: "translateY(0)" }}
-      transition={transition}
-      exit={{ opacity: 0, transform: "translateY(-100%)" }}
-      style={{
-        height: "100%",
-        transform: "translateZ(-100%)",
-        overflow: "hidden",
-      }}
-    >
+    <Motion>
       <Box
         sx={{
           height: "100%",
@@ -44,7 +29,7 @@ const ChatApp = () => {
         <Divider />
         <ChatList />
       </Box>
-    </motion.div>
+    </Motion>
   );
 };
 
