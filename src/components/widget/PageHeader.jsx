@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
-const PageHeader = ({ action }) => {
+const PageHeader = ({ title, action }) => {
   return (
     <Box
       sx={{
@@ -30,7 +30,7 @@ const PageHeader = ({ action }) => {
             alignItems: "flex-start",
           }}
         >
-          <Typography variant="h5">PageHeader</Typography>
+          <Typography variant="h6">{title || "Page Header"}</Typography>
         </Box>
       </button>
       {action}
@@ -39,6 +39,7 @@ const PageHeader = ({ action }) => {
 };
 
 PageHeader.propTypes = {
+  title: PropTypes.string,
   action: PropTypes.node,
 };
 

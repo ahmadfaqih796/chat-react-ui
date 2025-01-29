@@ -17,6 +17,7 @@ const ChatApp = () => {
       }}
     >
       <PageHeader
+        title="Chat"
         action={
           <IconButton>
             <AddCommentIcon />

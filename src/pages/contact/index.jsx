@@ -14,7 +14,7 @@ const ContactApp = () => {
         borderRadius: "10px",
       }}
     >
-      <PageHeader />
+      <PageHeader title="Contact" />
       <Divider />
     </Box>
   );
