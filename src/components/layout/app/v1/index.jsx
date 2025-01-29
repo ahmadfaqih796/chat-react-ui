@@ -39,7 +39,7 @@ const BaseLayout = () => {
   };
 
   return (
-    <div>
+    <div style={{ overflowX: "hidden", overflowY: "hidden" }}>
       {isMobile && (
         <AppBar position="fixed">
           <Toolbar
