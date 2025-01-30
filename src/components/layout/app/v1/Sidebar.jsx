@@ -9,6 +9,7 @@ import { NavLink } from "react-router-dom";
 import { useAlert } from "../../../../hooks/useAlert";
 import { useAuth } from "../../../../hooks/useAuth";
 import IconButton from "../../../common/Button/IconButton";
+import ThemeButton from "./components/sidebar/ThemeButton";
 
 const Sidebar = () => {
   const { onLogout } = useAuth();
@@ -84,6 +85,7 @@ const Sidebar = () => {
           gap: 2,
         }}
       >
+        <ThemeButton />
         <IconButton title="Logout" onClick={handleLogOut}>
           <LogoutOutlined />
         </IconButton>
