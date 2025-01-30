@@ -1,15 +1,18 @@
 import { Box, Chip, Divider, Typography } from "@mui/material";
-import React from "react";
-import { DUMMY_MESSAGES } from "./dummy";
 import moment from "moment";
+import React from "react";
+import { useChat } from "../../../../../../context/ChatContext";
 
 const ChatMessage = () => {
+  const { message } = useChat();
   const session = {
     id: 1,
   };
-  const data = DUMMY_MESSAGES;
 
   const scrollRef = React.useRef(null);
+  const data = React.useMemo(() => {
+    return message;
+  }, [message]);
   React.useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;

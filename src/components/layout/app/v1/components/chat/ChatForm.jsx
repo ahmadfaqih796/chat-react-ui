@@ -1,13 +1,30 @@
 import SendIcon from "@mui/icons-material/Send";
 import { Box, Button, OutlinedInput } from "@mui/material";
 import React from "react";
+import { useChat } from "../../../../../../context/ChatContext";
 
 const ChatForm = () => {
+  const { setMessage } = useChat();
+  const handleSubmit = React.useCallback(
+    (e) => {
+      e.preventDefault();
+      setMessage((prev) => [
+        ...prev,
+        {
+          id: prev.length + 1,
+          user_id: 1,
+          created_at: new Date().toISOString(),
+          comment: e.target.message.value,
+        },
+      ]);
+      e.target.message.value = "";
+    },
+    [setMessage]
+  );
+
   return (
     <form
-      //   onSubmit={(e) => {
-      //     handleCreateComment(e, clientId);
-      //   }}
+      onSubmit={handleSubmit}
       style={{
         display: "flex",
         alignItems: "center",
