@@ -6,11 +6,22 @@ import {
 import { Box } from "@mui/material";
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useAlert } from "../../../../hooks/useAlert";
 import { useAuth } from "../../../../hooks/useAuth";
 import IconButton from "../../../common/Button/IconButton";
 
 const Sidebar = () => {
   const { onLogout } = useAuth();
+  const { onAlert } = useAlert();
+
+  const handleLogOut = () => {
+    try {
+      onLogout();
+      onAlert("success", "Logout berhasil");
+    } catch (error) {
+      onAlert("error", "Gagal Logout");
+    }
+  };
 
   return (
     <Box
@@ -73,7 +84,7 @@ const Sidebar = () => {
           gap: 2,
         }}
       >
-        <IconButton title="Logout" onClick={onLogout}>
+        <IconButton title="Logout" onClick={handleLogOut}>
           <LogoutOutlined />
         </IconButton>
       </Box>

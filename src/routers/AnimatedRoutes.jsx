@@ -2,13 +2,15 @@ import React from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { menuRouter } from "./menuRouter";
 import { AnimatePresence } from "motion/react";
+import { useAuth } from "../hooks/useAuth";
 
 const LoginApp = React.lazy(() => import("../pages/auth/login"));
 const MainLayout = React.lazy(() => import("../components/layout/MainLayout"));
 
 const AnimatedRoutes = () => {
+  const { session } = useAuth();
   const location = useLocation();
-  const session = true;
+  // const session = true;
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
