@@ -33,7 +33,7 @@ const theme = createTheme({
         background: {
           main: "#003a8c",
           container: "#262626",
-          layout: "#141414",
+          layout: "#030852",
         },
         primary: {
           container: "#000",

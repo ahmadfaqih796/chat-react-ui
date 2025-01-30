@@ -66,15 +66,15 @@ const BaseLayout = () => {
         </AppBar>
       )}
       <Box
-        sx={{
+        sx={(theme) => ({
           pt: isMobile ? "64px" : "0px",
           display: "flex",
           width: "100vw",
           height: "100vh",
-          background: "linear-gradient(45deg, #f0f5ff 30%, #adc6ff 90%)",
+          background: theme.palette.background.layout,
           overflowX: "hidden",
           scrollbarWidth: "none",
-        }}
+        })}
       >
         <Box
           sx={{
