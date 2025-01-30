@@ -1,16 +1,15 @@
-import React from "react";
-import { USER_LIST } from "./userDummy";
-import { Avatar, Box, TextField, Typography } from "@mui/material";
-import DoneAllIcon from "@mui/icons-material/DoneAll";
 import CheckIcon from "@mui/icons-material/Check";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
+import { Avatar, Box, TextField, Typography } from "@mui/material";
 import PropTypes from "prop-types";
+import React from "react";
 import { useOutletContext } from "react-router-dom";
+import { USER_LIST } from "./userDummy";
 
 const ChatList = () => {
   const { onOpen, user } = useOutletContext();
 
   const [search, setSearch] = React.useState("");
-  const [chatId, setChatId] = React.useState(user?.id);
   const data = USER_LIST;
 
   const filterData = React.useMemo(() => {
@@ -21,10 +20,9 @@ const ChatList = () => {
 
   const handleOpen = React.useCallback(
     (field) => {
-      setChatId(field.id);
       onOpen(field);
     },
-    [onOpen, setChatId]
+    [onOpen]
   );
 
   return (
@@ -71,7 +69,7 @@ const ChatList = () => {
               padding: "10px",
               width: "100%",
               border: "none",
-              backgroundColor: chatId === item.id ? "#adc6ff" : "#f0f5ff",
+              backgroundColor: user?.id === item.id ? "#adc6ff" : "#f0f5ff",
               cursor: "pointer",
               borderRadius: "10px",
             }}

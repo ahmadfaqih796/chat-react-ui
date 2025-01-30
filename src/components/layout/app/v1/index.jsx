@@ -15,6 +15,7 @@ import ChatLayout from "./Chat";
 import Profile from "./Profile";
 import Sidebar from "./Sidebar";
 import Motion from "../../../widget/Motion";
+import { useChat } from "../../../../context/ChatContext";
 
 const WIDTH = {
   sidebar: "70px",
@@ -23,9 +24,11 @@ const WIDTH = {
 };
 
 const BaseLayout = () => {
+  const { chat, setChat } = useChat();
+
   const [open, setOpen] = React.useState(false);
-  const [user, setUser] = React.useState(null);
   const [isOpenChat, setIsOpenChat] = React.useState(false);
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));
@@ -35,7 +38,7 @@ const BaseLayout = () => {
   };
 
   const handleOpenChat = (data) => {
-    setUser(data);
+    setChat(data);
     setIsOpenChat(!isOpenChat);
   };
 
@@ -52,7 +55,7 @@ const BaseLayout = () => {
               color="inherit"
               aria-label="open drawer"
               edge="start"
-              onClick={() => handleOpenChat()}
+              onClick={(x) => handleOpenChat(x)}
             >
               <MenuIcon />
             </IconButton>
@@ -93,7 +96,7 @@ const BaseLayout = () => {
           }}
         >
           <Motion>
-            <Outlet context={{ onOpen: handleOpenChat, user: user }} />
+            <Outlet context={{ onOpen: handleOpenChat, user: chat }} />
           </Motion>
         </Box>
         <Box
@@ -114,7 +117,7 @@ const BaseLayout = () => {
           }}
         >
           <ChatLayout
-            data={user}
+            data={chat}
             isMobile={isMobile}
             onClose={(x) => handleOpenChat(x)}
             onOpenDrawer={() => handleOpenDrawer()}
