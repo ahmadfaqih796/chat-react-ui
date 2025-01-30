@@ -11,13 +11,14 @@ const ChatLayout = ({ data, onOpenDrawer, onClose, isMobile }) => {
   }
   return (
     <Box
-      sx={{
+      sx={(theme) => ({
         height: "100%",
         display: "flex",
         flexDirection: "column",
-        backgroundColor: "#fff",
+        backgroundColor: theme.palette.background.paper,
+        transition: theme.palette.transition,
         borderRadius: "10px",
-      }}
+      })}
     >
       <ChatHeader
         data={data}

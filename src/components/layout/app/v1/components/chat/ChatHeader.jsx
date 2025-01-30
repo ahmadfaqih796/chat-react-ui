@@ -37,7 +37,9 @@ const ChatHeader = ({ data, onOpenDrawer, onClose, isMobile }) => {
           sx={{ bgcolor: "red", width: "40px", height: "40px", mr: 1 }}
           aria-label="recipe"
         >
-          R
+          <Typography variant="body1" sx={{ color: "#fff" }}>
+            {data?.name?.charAt(0) || "A"}
+          </Typography>
         </Avatar>
         <Box
           sx={{

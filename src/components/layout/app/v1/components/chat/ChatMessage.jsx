@@ -79,14 +79,17 @@ const ChatMessage = () => {
                 }}
               >
                 <Box
-                  sx={{
+                  sx={(theme) => ({
                     padding: "8px 10px",
                     borderRadius: "5px",
                     margin: "5px 0",
                     fontWeight: "normal",
 
-                    backgroundColor: "#D3F1DF",
-                  }}
+                    backgroundColor:
+                      item.user_id === session?.id
+                        ? theme.palette.secondary.main
+                        : theme.palette.primary.main,
+                  })}
                 >
                   {item.comment}
                 </Box>
