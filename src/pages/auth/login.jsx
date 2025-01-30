@@ -3,14 +3,12 @@ import React from "react";
 import { useAlert } from "../../hooks/useAlert";
 import { useAuth } from "../../hooks/useAuth";
 import "./auth.style.css";
-import { useModeTheme } from "../../hooks/useModeTheme";
 // import logo from "../../logo.svg";
 
 function LoginApp() {
   const [isActive, setIsActive] = React.useState(false);
   const { onLogin } = useAuth();
   const { onAlert } = useAlert();
-  const { onMode } = useModeTheme();
 
   const handleClick = () => {
     setIsActive(!isActive);
@@ -85,8 +83,6 @@ function LoginApp() {
         >
           <form>
             <h1>Sign In</h1>
-            <button onClick={() => onMode("dark")}>Dark</button>
-            <button onClick={() => onMode("light")}>Light</button>
             <div className="social-icons">
               <a href="#" className="icon">
                 <i className="fa-brands fa-google-plus-g"></i>

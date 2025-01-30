@@ -4,15 +4,15 @@ import React from "react";
 const ChatBlank = () => {
   return (
     <Box
-      sx={{
+      sx={(theme) => ({
         height: "100%",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#fff",
+        backgroundColor: theme.palette.background.paper,
         borderRadius: "10px",
-      }}
+      })}
     >
       <img src="/chat_layout.svg" alt="chat_layout" style={{ width: "40%" }} />
       <Typography variant="h5" textAlign="center" width="80%" sx={{ my: 2 }}>
