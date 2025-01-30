@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 // import { useAuth } from "../hooks/useAuth";
 import AnimatedRoutes from "./AnimatedRoutes";
 import { ChatProvider } from "../context/ChatContext";
+import RouterLoading from "../components/common/Loading/RouterLoading";
 
 const AppRoutes = () => {
   // const { session } = useAuth();
@@ -10,7 +11,7 @@ const AppRoutes = () => {
   return (
     <Router>
       <ChatProvider>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<RouterLoading />}>
           <AnimatedRoutes />
         </Suspense>
       </ChatProvider>
