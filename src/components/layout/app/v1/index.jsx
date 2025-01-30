@@ -14,6 +14,7 @@ import { Outlet } from "react-router-dom";
 import ChatLayout from "./Chat";
 import Profile from "./Profile";
 import Sidebar from "./Sidebar";
+import Motion from "../../../widget/Motion";
 
 const WIDTH = {
   sidebar: "70px",
@@ -91,7 +92,9 @@ const BaseLayout = () => {
               isOpenChat && isMobile ? "translateX(-100%)" : "translateX(0)",
           }}
         >
-          <Outlet context={{ onOpen: handleOpenChat, user: user }} />
+          <Motion>
+            <Outlet context={{ onOpen: handleOpenChat, user: user }} />
+          </Motion>
         </Box>
         <Box
           sx={{
