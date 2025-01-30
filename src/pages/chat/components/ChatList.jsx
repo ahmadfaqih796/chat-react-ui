@@ -84,7 +84,7 @@ const ChatList = () => {
                   transition: theme.palette.transition,
                   backgroundColor:
                     user?.id === item.id
-                      ? theme.palette.primary.main
+                      ? theme.palette.primary.default
                       : theme.palette.background.container,
                   textTransform: "none",
                   color: theme.palette.text.primary,

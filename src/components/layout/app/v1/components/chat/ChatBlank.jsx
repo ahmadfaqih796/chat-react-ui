@@ -11,6 +11,7 @@ const ChatBlank = () => {
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: theme.palette.background.paper,
+        transition: theme.palette.transition,
         borderRadius: "10px",
       })}
     >

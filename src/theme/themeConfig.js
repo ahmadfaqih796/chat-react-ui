@@ -16,11 +16,13 @@ const theme = createTheme({
           container: "#fafafa",
         },
         primary: {
+          default: "#d6e4ff",
           container: "#fff",
-          main: "#556cd6",
+          main: "#3f50b5",
         },
         secondary: {
-          main: "#19857b",
+          default: "#d9f7be",
+          main: "#d9f7be",
         },
         error: {
           main: red.A400,
@@ -36,11 +38,13 @@ const theme = createTheme({
           layout: "#030852",
         },
         primary: {
+          default: "#061178",
           container: "#000",
-          main: "#556cd6",
+          main: "#002884",
         },
         secondary: {
-          main: "#19857b",
+          default: "#135200",
+          main: "#135200",
         },
         error: {
           main: red.A400,
