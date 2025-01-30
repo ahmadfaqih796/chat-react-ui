@@ -7,14 +7,15 @@ import ChatList from "./components/ChatList";
 const ChatApp = () => {
   return (
     <Box
-      sx={{
+      sx={(theme) => ({
         height: "100%",
         display: "flex",
         flexDirection: "column",
         // justifyContent: "space-between",
-        backgroundColor: "#fff",
+        backgroundColor: theme.palette.background.paper,
+        transition: theme.palette.transition,
         borderRadius: "10px",
-      }}
+      })}
     >
       <PageHeader
         title="Chat"

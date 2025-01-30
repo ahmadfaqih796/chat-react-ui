@@ -1,6 +1,6 @@
 import CheckIcon from "@mui/icons-material/Check";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
-import { Avatar, Box, TextField, Typography } from "@mui/material";
+import { Avatar, Box, Button, TextField, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
 import { useOutletContext } from "react-router-dom";
@@ -59,9 +59,9 @@ const ChatList = () => {
         }}
       >
         {filterData.map((item) => (
-          <button
+          <Button
             key={item.id}
-            style={{
+            sx={(theme) => ({
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
@@ -69,10 +69,16 @@ const ChatList = () => {
               padding: "10px",
               width: "100%",
               border: "none",
-              backgroundColor: user?.id === item.id ? "#adc6ff" : "#f0f5ff",
+              transition: theme.palette.transition,
+              backgroundColor:
+                user?.id === item.id
+                  ? theme.palette.primary.main
+                  : theme.palette.background.container,
+              textTransform: "none",
+              color: theme.palette.text.primary,
               cursor: "pointer",
               borderRadius: "10px",
-            }}
+            })}
             onClick={() => handleOpen(item)}
           >
             <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -82,6 +88,7 @@ const ChatList = () => {
                   width: "40px",
                   height: "40px",
                   mr: 1,
+                  color: "#fff",
                 }}
                 aria-label="recipe"
               >
@@ -122,7 +129,7 @@ const ChatList = () => {
                 <CheckIcon sx={{ fontSize: "15px" }} color="disabled" />
               )}
             </Box>
-          </button>
+          </Button>
         ))}
       </Box>
     </Box>
