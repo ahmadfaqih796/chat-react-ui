@@ -7,13 +7,14 @@ import ProfileContent from "./components/profile/ProfileContent";
 const Profile = ({ onClose }) => {
   return (
     <Box
-      sx={{
+      sx={(theme) => ({
         height: "100%",
         display: "flex",
         flexDirection: "column",
-        backgroundColor: "#fff",
+        backgroundColor: theme.palette.background.paper,
+        transition: theme.palette.transition,
         borderRadius: "10px",
-      }}
+      })}
     >
       <ProfileHeader onClose={onClose} />
       <Divider />

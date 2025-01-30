@@ -123,17 +123,19 @@ const BaseLayout = () => {
             onOpenDrawer={() => handleOpenDrawer()}
           />
           <Drawer
-            sx={{
+            sx={(theme) => ({
               width: WIDTH.profile,
               flexShrink: 0,
               "& .MuiDrawer-paper": {
                 border: "none",
-                background: isDesktop ? "transparent" : "#fff",
+                background: isDesktop
+                  ? "transparent"
+                  : theme.palette.background.paper,
                 p: isDesktop ? 1 : 0,
                 width: WIDTH.profile,
                 boxSizing: "border-box",
               },
-            }}
+            })}
             transitionDuration={{
               enter: 700,
               exit: 500,

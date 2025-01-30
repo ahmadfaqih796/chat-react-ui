@@ -26,15 +26,15 @@ const Sidebar = () => {
 
   return (
     <Box
-      sx={{
+      sx={(theme) => ({
         height: "100%",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        backgroundColor: "#fff",
+        background: theme.palette.background.paper,
         borderRadius: "10px",
         p: 1,
-      }}
+      })}
     >
       <Box
         sx={{
