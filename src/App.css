@@ -7,11 +7,11 @@
   pointer-events: none;
 }
 
-.active {
-  background-color: #61dafb;
+/* .active {
+  background-color: red;
   border-radius: 100%;
   padding: 3px;
-}
+} */
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

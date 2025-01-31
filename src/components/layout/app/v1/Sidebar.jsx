@@ -5,15 +5,49 @@ import {
 } from "@mui/icons-material";
 import { Box } from "@mui/material";
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useAlert } from "../../../../hooks/useAlert";
 import { useAuth } from "../../../../hooks/useAuth";
 import IconButton from "../../../common/Button/IconButton";
+import Indicator from "./components/sidebar/Indicator";
 import ThemeButton from "./components/sidebar/ThemeButton";
+
+const MENU_LIST = [
+  {
+    id: 1,
+    title: "Chat",
+    icon: <MessageOutlined />,
+    path: "/chat",
+  },
+  {
+    id: 2,
+    title: "Contact",
+    icon: <ContactsSharp />,
+    path: "/contact",
+  },
+];
 
 const Sidebar = () => {
   const { onLogout } = useAuth();
   const { onAlert } = useAlert();
+  const location = useLocation();
+
+  const [activePath, setActivePath] = React.useState(location.pathname);
+
+  React.useEffect(() => {
+    setActivePath(location.pathname);
+  }, [location.pathname]);
+
+  const handlePositionPath = (path) => {
+    switch (path) {
+      case "/chat":
+        return 0;
+      case "/contact":
+        return 50;
+      default:
+        return 0;
+    }
+  };
 
   const handleLogOut = () => {
     try {
@@ -34,6 +68,7 @@ const Sidebar = () => {
         background: theme.palette.background.paper,
         borderRadius: "10px",
         p: 1,
+        position: "relative",
       })}
     >
       <Box
@@ -43,39 +78,30 @@ const Sidebar = () => {
           alignItems: "center",
           flexDirection: "column",
           gap: 2,
+          position: "relative",
         }}
       >
-        {/* {menuRouter.map(({ path, label, icon: Icon }) => (
+        <Indicator activePath={handlePositionPath(activePath)} />
+
+        {MENU_LIST.map((item) => (
           <NavLink
-            key={path}
-            to={path}
+            to={item.path}
             className={({ isActive }) => (isActive ? "active" : "")}
+            key={item.id}
           >
-            <IconButton title={label}>
-              {Icon &&
-                React.createElement(require("@mui/icons-material")[Icon], {
-                  color: "primary",
-                })}
-            </IconButton>
+            <IconButton title={item.title}>{item.icon}</IconButton>
           </NavLink>
-        ))} */}
-        <NavLink
+        ))}
+        {/* <NavLink
           to="/chat"
-          className={({ isActive }) => (isActive ? "active" : "")}
+          // className={({ isActive }) => (isActive ? "active" : "")}
         >
           <IconButton title="Chat">
-            <MessageOutlined color="primary" />
+            <MessageOutlined />
           </IconButton>
-        </NavLink>
-        <NavLink
-          to="/contact"
-          className={({ isActive }) => (isActive ? "active" : "")}
-        >
-          <IconButton title="Contact">
-            <ContactsSharp color="primary" />
-          </IconButton>
-        </NavLink>
+        </NavLink> */}
       </Box>
+
       <Box
         sx={{
           display: "flex",
