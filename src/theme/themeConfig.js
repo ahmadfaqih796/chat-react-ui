@@ -11,8 +11,9 @@ const theme = createTheme({
         transition: "all 0.2s ease-in-out",
         background: {
           //  layout: "linear-gradient(45deg, #f0f5ff 30%, #adc6ff 90%)",
+          icon: "#10239e",
           main: "#556cd6",
-          layout: "#557cd6",
+          layout: "#adc6ff",
           container: "#fafafa",
         },
         primary: {
@@ -33,6 +34,7 @@ const theme = createTheme({
       palette: {
         transition: "all 0.5s ease-in-out",
         background: {
+          icon: "#adc6ff",
           main: "#003a8c",
           container: "#262626",
           layout: "#030852",

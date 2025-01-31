@@ -1,76 +1,41 @@
 /* HTML: <div class="loader"></div> */
 .loader {
-  width: 50px;
-  aspect-ratio: 1.154;
-  position: relative;
+  width: 40px;
+  height: 40px;
+  color: #f03355;
   background: conic-gradient(
-    from 120deg at 50% 64%,
-    #0000,
-    #2f54eb 1deg 120deg,
-    #0000 121deg
-  );
-  animation: l27-0 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
+      from -45deg at top 20px left 50%,
+      #0000,
+      currentColor 1deg 90deg,
+      #0000 91deg
+    ),
+    conic-gradient(
+      from 45deg at right 20px top 50%,
+      #0000,
+      currentColor 1deg 90deg,
+      #0000 91deg
+    ),
+    conic-gradient(
+      from 135deg at bottom 20px left 50%,
+      #0000,
+      currentColor 1deg 90deg,
+      #0000 91deg
+    ),
+    conic-gradient(
+      from -135deg at left 20px top 50%,
+      #0000,
+      currentColor 1deg 90deg,
+      #0000 91deg
+    );
+  animation: l4 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
 }
-.loader:before,
-.loader:after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: inherit;
-  transform-origin: 50% 66%;
-  animation: l27-1 1.5s infinite;
-}
-.loader:after {
-  --s: -1;
-}
-@keyframes l27-0 {
-  0%,
-  30% {
-    transform: rotate(0);
+@keyframes l4 {
+  50% {
+    width: 60px;
+    height: 60px;
+    transform: rotate(180deg);
   }
-  70% {
-    transform: rotate(120deg);
-  }
-  70.01%,
   100% {
     transform: rotate(360deg);
-  }
-}
-@keyframes l27-1 {
-  0% {
-    transform: rotate(calc(var(--s, 1) * 120deg)) translate(0);
-  }
-  30%,
-  70% {
-    transform: rotate(calc(var(--s, 1) * 120deg))
-      translate(calc(var(--s, 1) * -5px), 10px);
-  }
-  100% {
-    transform: rotate(calc(var(--s, 1) * 120deg)) translate(0);
-  }
-}
-
-/* HTML: <div class="_loader__loading"></div> */
-._loader__loading {
-  width: fit-content;
-  font-size: 40px;
-  line-height: 1.5;
-  font-family: system-ui, sans-serif;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #0000;
-  -webkit-text-stroke: 1px #000;
-  background: radial-gradient(1.13em at 50% 1.6em, #000 99%, #0000 101%)
-      calc(50% - 1.6em) 0/3.2em 100% text,
-    radial-gradient(1.13em at 50% -0.8em, #0000 99%, #000 101%) 50% 0.8em/3.2em
-      100% repeat-x text;
-  animation: l9 2s linear infinite;
-}
-._loader__loading:before {
-  content: "Loading";
-}
-@keyframes l9 {
-  to {
-    background-position: calc(50% + 1.6em) 0, calc(50% + 3.2em) 0.8em;
   }
 }
