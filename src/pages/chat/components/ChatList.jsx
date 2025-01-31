@@ -59,7 +59,7 @@ const ChatList = () => {
           borderRadius: "10px",
         }}
       >
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="sync">
           {filterData.map((item) => (
             <motion.div
               key={item.id}

@@ -38,6 +38,8 @@ const theme = createTheme({
           main: "#003a8c",
           container: "#262626",
           layout: "#030852",
+          // paper: "#1E1E1E",
+          paper: "#2C2C2C",
         },
         primary: {
           default: "#061178",
