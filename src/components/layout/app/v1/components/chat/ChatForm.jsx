@@ -2,21 +2,43 @@ import SendIcon from "@mui/icons-material/Send";
 import { Box, Button, OutlinedInput } from "@mui/material";
 import React from "react";
 import { useChat } from "../../../../../../context/ChatContext";
+import AiService from "../../../../../../services/AiService";
+import { useAlert } from "../../../../../../hooks/useAlert";
 
 const ChatForm = () => {
   const { setMessage } = useChat();
+  const { onAlert } = useAlert();
   const handleSubmit = React.useCallback(
-    (e) => {
+    async (e) => {
       e.preventDefault();
+      const userMessage = e.target.message.value;
       setMessage((prev) => [
         ...prev,
         {
           id: prev.length + 1,
           user_id: 1,
           created_at: new Date().toISOString(),
-          comment: e.target.message.value,
+          comment: userMessage,
         },
       ]);
+      try {
+        const aiResponse = await AiService.generateResponse(userMessage);
+        if (aiResponse) {
+          setMessage((prev) => [
+            ...prev,
+            {
+              id: prev.length + 1,
+              user_id: 2,
+              created_at: new Date().toISOString(),
+              comment: aiResponse,
+            },
+          ]);
+          onAlert("success", "Message sent successfully!");
+        }
+      } catch (error) {
+        onAlert("error", "Message failed to send!");
+        console.log("maaffff", error);
+      }
       e.target.message.value = "";
     },
     [setMessage]
