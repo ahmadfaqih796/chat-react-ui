@@ -9,30 +9,20 @@ const PageHeader = ({ title, action }) => {
         justifyContent: "space-between",
         alignItems: "center",
         height: "70px",
-        p: 1,
+        pl: 2,
+        pr: 1,
+        py: 1,
       }}
     >
-      <button
-        style={{
+      <Box
+        sx={{
           display: "flex",
-          alignItems: "center",
-          gap: 5,
-          width: "100%",
-          border: "none",
-          backgroundColor: "transparent",
-          cursor: "pointer",
+          flexDirection: "column",
+          alignItems: "flex-start",
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-          }}
-        >
-          <Typography variant="h6">{title || "Page Header"}</Typography>
-        </Box>
-      </button>
+        <Typography variant="h6">{title || "Page Header"}</Typography>
+      </Box>
       {action}
     </Box>
   );

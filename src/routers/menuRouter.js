@@ -13,4 +13,10 @@ export const menuRouter = [
     icon: "ContactsSharp",
     component: React.lazy(() => import("../pages/contact")),
   },
+  {
+    path: "/ai",
+    label: "AI",
+    icon: "AutoAwesome",
+    component: React.lazy(() => import("../pages/ai")),
+  },
 ];

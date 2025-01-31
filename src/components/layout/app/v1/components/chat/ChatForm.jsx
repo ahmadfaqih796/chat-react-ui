@@ -36,12 +36,12 @@ const ChatForm = () => {
           onAlert("success", "Message sent successfully!");
         }
       } catch (error) {
-        onAlert("error", "Message failed to send!");
+        onAlert("error", error?.message || "Message failed to send!");
         console.log("maaffff", error);
       }
       e.target.message.value = "";
     },
-    [setMessage]
+    [setMessage, onAlert]
   );
 
   return (
