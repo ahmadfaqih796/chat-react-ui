@@ -76,4 +76,10 @@ export const USER_LIST = [
     last_message: "That's great to hear!",
     is_read: false,
   },
+  {
+    id: 12,
+    name: "Faqih AI",
+    last_message: "That's great to hear!",
+    is_ai: true,
+  },
 ];

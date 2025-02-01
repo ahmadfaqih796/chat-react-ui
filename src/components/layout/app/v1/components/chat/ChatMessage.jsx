@@ -88,7 +88,7 @@ const ChatMessage = () => {
                     backgroundColor:
                       item.user_id === session?.id
                         ? theme.palette.secondary.default
-                        : theme.palette.primary.default,
+                        : theme.palette.background.container,
                   })}
                 >
                   {item.comment}
