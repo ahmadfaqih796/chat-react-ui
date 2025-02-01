@@ -2,9 +2,10 @@ import { Box, Chip, Divider, Typography } from "@mui/material";
 import moment from "moment";
 import React from "react";
 import { useChat } from "../../../../../../context/ChatContext";
+import PropTypes from "prop-types";
 
-const ChatMessage = () => {
-  const { message } = useChat();
+const ChatMessage = ({ loading }) => {
+  const { chat, message } = useChat();
   const session = {
     id: 1,
   };
@@ -106,6 +107,17 @@ const ChatMessage = () => {
               </Box>
             </Box>
           ))}
+          {loading && chat.id === "ai" && (
+            <Box
+              sx={{
+                display: "flex",
+              }}
+            >
+              <Typography variant="body1" color="textSecondary">
+                AI is typing...
+              </Typography>
+            </Box>
+          )}
         </Box>
       ) : (
         <Box
@@ -123,6 +135,10 @@ const ChatMessage = () => {
       )}
     </Box>
   );
+};
+
+ChatMessage.propTypes = {
+  loading: PropTypes.bool,
 };
 
 export default ChatMessage;

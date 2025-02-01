@@ -4,11 +4,39 @@ import React from "react";
 import { useChat } from "../../../../../../context/ChatContext";
 import AiService from "../../../../../../services/AiService";
 import { useAlert } from "../../../../../../hooks/useAlert";
+import PropTypes from "prop-types";
 
-const ChatForm = () => {
-  const { setMessage } = useChat();
+const ChatForm = ({ onLoading, isLoading }) => {
+  const { chat, setMessage } = useChat();
   const { onAlert } = useAlert();
+
   const handleSubmit = React.useCallback(
+    async (e) => {
+      e.preventDefault();
+      const userMessage = e.target.message.value;
+      onLoading(true);
+      try {
+        setMessage((prev) => [
+          ...prev,
+          {
+            id: prev.length + 1,
+            user_id: 1,
+            created_at: new Date().toISOString(),
+            comment: userMessage,
+          },
+        ]);
+        onAlert("success", "Ini Form Chat");
+      } catch (error) {
+        onAlert("error", error?.message || "Message failed to send!");
+      } finally {
+        onLoading(false);
+        e.target.message.value = "";
+      }
+    },
+    [setMessage, onAlert, onLoading]
+  );
+
+  const handleAISubmit = React.useCallback(
     async (e) => {
       e.preventDefault();
       const userMessage = e.target.message.value;
@@ -21,6 +49,7 @@ const ChatForm = () => {
           comment: userMessage,
         },
       ]);
+      onLoading(true);
       try {
         const aiResponse = await AiService.generateResponse(userMessage);
         if (aiResponse) {
@@ -33,20 +62,22 @@ const ChatForm = () => {
               comment: aiResponse,
             },
           ]);
-          onAlert("success", "Message sent successfully!");
+          onAlert("success", "Ini AI Chat");
         }
       } catch (error) {
         onAlert("error", error?.message || "Message failed to send!");
         console.log("maaffff", error);
+      } finally {
+        onLoading(false);
+        e.target.message.value = "";
       }
-      e.target.message.value = "";
     },
-    [setMessage, onAlert]
+    [setMessage, onAlert, onLoading]
   );
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={chat.is_ai ? handleAISubmit : handleSubmit}
       style={{
         display: "flex",
         alignItems: "center",
@@ -66,6 +97,7 @@ const ChatForm = () => {
         }}
       >
         <OutlinedInput
+          disabled={isLoading}
           size="small"
           name="message"
           sx={{
@@ -78,6 +110,7 @@ const ChatForm = () => {
           placeholder="Type a message..."
         />
         <Button
+          disabled={isLoading}
           aria-label="send"
           variant="contained"
           type="submit"
@@ -100,6 +133,11 @@ const ChatForm = () => {
       </Box>
     </form>
   );
+};
+
+ChatForm.propTypes = {
+  onLoading: PropTypes.func,
+  isLoading: PropTypes.bool,
 };
 
 export default ChatForm;

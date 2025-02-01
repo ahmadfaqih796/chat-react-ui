@@ -6,6 +6,7 @@ import ChatForm from "./components/chat/ChatForm";
 import ChatHeader from "./components/chat/ChatHeader";
 import ChatMessage from "./components/chat/ChatMessage";
 const ChatLayout = ({ data, onOpenDrawer, onClose, isMobile }) => {
+  const [loading, setLoading] = React.useState(false);
   if (!data) {
     return <ChatBlank />;
   }
@@ -27,9 +28,9 @@ const ChatLayout = ({ data, onOpenDrawer, onClose, isMobile }) => {
         isMobile={isMobile}
       />
       <Divider />
-      <ChatMessage />
+      <ChatMessage loading={loading} />
       <Divider />
-      <ChatForm />
+      <ChatForm onLoading={setLoading} isLoading={loading} />
     </Box>
   );
 };
