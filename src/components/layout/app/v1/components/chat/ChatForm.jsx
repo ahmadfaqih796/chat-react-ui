@@ -65,7 +65,7 @@ const ChatForm = ({ onLoading, isLoading }) => {
           onAlert("success", "Ini AI Chat");
         }
       } catch (error) {
-        onAlert("error", error?.message || "Message failed to send!");
+        onAlert("error", "Hapunten, AI gagal merespon, silahkan coba lagi");
         console.log("maaffff", error);
       } finally {
         onLoading(false);

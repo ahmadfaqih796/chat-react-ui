@@ -3,6 +3,7 @@ import moment from "moment";
 import React from "react";
 import { useChat } from "../../../../../../context/ChatContext";
 import PropTypes from "prop-types";
+import { formatAIResponse } from "../../../../../../utils/formatAIResponse";
 
 const ChatMessage = ({ loading }) => {
   const { chat, message } = useChat();
@@ -85,15 +86,22 @@ const ChatMessage = ({ loading }) => {
                     borderRadius: "5px",
                     margin: "5px 0",
                     fontWeight: "normal",
-
+                    fontFamily: "monospace",
+                    whiteSpace: "break-spaces",
+                    wordWrap: "break-word",
+                    overflowX: "auto",
+                    maxWidth: "100%",
+                    display: "block",
+                    scrollbarWidth: "none",
                     backgroundColor:
                       item.user_id === session?.id
                         ? theme.palette.secondary.default
                         : theme.palette.background.container,
                   })}
-                >
-                  {item.comment}
-                </Box>
+                  dangerouslySetInnerHTML={{
+                    __html: formatAIResponse(item.comment),
+                  }}
+                />
                 <Typography
                   variant="body2"
                   color="textSecondary"

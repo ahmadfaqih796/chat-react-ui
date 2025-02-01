@@ -11,8 +11,8 @@ class AiService {
       const result = await this.model.generateContent(prompt);
       return result?.response?.text() || "Error: No response received";
     } catch (error) {
-      console.error("AI Service Error:", error);
-      return "Error: Unable to generate response";
+      console.error("AI Service Error:", error.response);
+      return error.message;
     }
   }
 }
