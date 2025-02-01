@@ -11,11 +11,11 @@ import {
 } from "@mui/material";
 import React from "react";
 import { Outlet } from "react-router-dom";
+import { useChat } from "../../../../context/ChatContext";
+import Motion from "../../../widget/Motion";
 import ChatLayout from "./Chat";
 import Profile from "./Profile";
 import Sidebar from "./Sidebar";
-import Motion from "../../../widget/Motion";
-import { useChat } from "../../../../context/ChatContext";
 
 const WIDTH = {
   sidebar: "70px",
@@ -37,10 +37,13 @@ const BaseLayout = () => {
     setOpen(!open);
   };
 
-  const handleOpenChat = (data) => {
-    setChat(data);
-    setIsOpenChat(!isOpenChat);
-  };
+  const handleOpenChat = React.useCallback(
+    (data) => {
+      setChat(data);
+      setIsOpenChat(!isOpenChat);
+    },
+    [setChat, isOpenChat, setIsOpenChat]
+  );
 
   return (
     <div style={{ overflowX: "hidden", overflowY: "hidden" }}>
@@ -83,7 +86,7 @@ const BaseLayout = () => {
             p: 1,
           }}
         >
-          <Sidebar />
+          <Sidebar onOpenAI={(x) => handleOpenChat(x)} />
         </Box>
         <Box
           sx={{

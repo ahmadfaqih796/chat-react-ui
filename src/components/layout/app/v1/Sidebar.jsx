@@ -11,7 +11,6 @@ import { useAuth } from "../../../../hooks/useAuth";
 import IconButton from "../../../common/Button/IconButton";
 import Indicator from "./components/sidebar/Indicator";
 import ThemeButton from "./components/sidebar/ThemeButton";
-import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 
 const MENU_LIST = [
   {
@@ -25,12 +24,6 @@ const MENU_LIST = [
     title: "Contact",
     icon: <ContactsSharp />,
     path: "/contact",
-  },
-  {
-    id: 3,
-    title: "AI",
-    icon: <AutoAwesomeIcon />,
-    path: "/ai",
   },
 ];
 
@@ -51,8 +44,6 @@ const Sidebar = () => {
         return 0;
       case "/contact":
         return 50;
-      case "/ai":
-        return 100;
       default:
         return 0;
     }
@@ -78,6 +69,7 @@ const Sidebar = () => {
         borderRadius: "10px",
         p: 1,
         position: "relative",
+        zIndex: 1,
       })}
     >
       <Box

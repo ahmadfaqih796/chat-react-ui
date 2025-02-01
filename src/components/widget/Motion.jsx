@@ -11,12 +11,14 @@ const transition = {
 const Motion = ({ children }) => {
   return (
     <motion.div
-      initial={{ opacity: 1, transform: "translateY(-100%)" }}
-      animate={{ opacity: 1, transform: "translateY(0)" }}
+      initial={{ opacity: 1, transform: "translateX(-150%)" }}
+      animate={{ opacity: 1, transform: "translateX(0)" }}
       transition={transition}
-      exit={{ opacity: 1, transform: "translateY(100%)" }}
+      exit={{ opacity: 1, transform: "translateX(-150%)" }}
       style={{
         height: "100%",
+        zIndex: -1,
+        position: "relative",
       }}
     >
       {children}
