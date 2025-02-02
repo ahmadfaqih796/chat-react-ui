@@ -20,5 +20,21 @@ export const useAuth = () => {
     dispatch({ type: "LOGOUT" });
   };
 
-  return { session: state.user, token: state.token, onLogin, onLogout };
+  const checkAuth = async () => {
+    try {
+      // Cek apakah token masih valid
+      await feathersClient.reAuthenticate();
+    } catch (error) {
+      console.error("Token expired or invalid:", error);
+      onLogout();
+    }
+  };
+
+  return {
+    session: state.user,
+    token: state.token,
+    onLogin,
+    onLogout,
+    checkAuth,
+  };
 };
