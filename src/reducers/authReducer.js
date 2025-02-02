@@ -11,7 +11,7 @@ export function authReducer(state = initialState, action) {
         ...state,
         loggedIn: true,
         user: action.payload.user,
-        token: action.payload.token,
+        token: action.payload.accessToken,
       };
     case "LOGOUT":
       return initialState;

@@ -1,16 +1,24 @@
 import React from "react";
 import { AuthContext } from "../context/AuthContext";
+import feathersClient from "../services/feathersClient";
 
 export const useAuth = () => {
   const { state, dispatch } = React.useContext(AuthContext);
 
-  const onLogin = (payload) => {
-    dispatch({ type: "LOGIN", payload: payload });
+  const onLogin = async (email, password) => {
+    const response = await feathersClient.authenticate({
+      strategy: "local",
+      email,
+      password,
+    });
+    console.log("masuk", response);
+    dispatch({ type: "LOGIN", payload: response });
   };
 
-  const onLogout = () => {
+  const onLogout = async () => {
+    await feathersClient.logout();
     dispatch({ type: "LOGOUT" });
   };
 
-  return { session: state.user, onLogin, onLogout };
+  return { session: state.user, token: state.token, onLogin, onLogout };
 };

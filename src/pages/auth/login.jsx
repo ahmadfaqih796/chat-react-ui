@@ -14,18 +14,20 @@ function LoginApp() {
     setIsActive(!isActive);
   };
 
-  const logIn = () => {
-    const userData = {
-      user: "John Doe",
-      token: "12345abcde",
-    };
-    try {
-      onLogin(userData);
-      onAlert("success", "Login successful!");
-    } catch (error) {
-      onAlert("error", "Login failed!");
-    }
-  };
+  const handleSignIn = React.useCallback(
+    async (e) => {
+      e.preventDefault();
+      try {
+        // await onLogin(e.target.email.value, e.target.password.value);
+        await onLogin("ahmadfaqih796@gmail.com", "123");
+        onAlert("success", "Login successful!");
+      } catch (error) {
+        console.log("ffffffffffff", error);
+        onAlert("error", error?.message || "Login failed!");
+      }
+    },
+    [onLogin, onAlert]
+  );
 
   return (
     <Box
@@ -101,7 +103,7 @@ function LoginApp() {
             <input type="email" placeholder="Email" />
             <input type="password" placeholder="Password" />
             <a href="#">Forget Your Password?</a>
-            <button onClick={logIn}>Sign In</button>
+            <button onClick={handleSignIn}>Sign In</button>
           </form>
         </Box>
 
