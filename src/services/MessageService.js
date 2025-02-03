@@ -8,7 +8,12 @@ class MessageService {
   async findMessage(params) {
     try {
       const response = await this.service.find({
-        query: params,
+        query: {
+          ...params,
+          $sort: {
+            created_at: 1,
+          },
+        },
       });
       return response;
     } catch (error) {
