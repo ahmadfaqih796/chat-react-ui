@@ -21,6 +21,16 @@ class MessageService {
       throw error;
     }
   }
+
+  async sendMessage(messageData) {
+    try {
+      const response = await this.service.create(messageData);
+      return response;
+    } catch (error) {
+      console.error("Error sending message:", error);
+      throw error;
+    }
+  }
 }
 
 const messageService = new MessageService();

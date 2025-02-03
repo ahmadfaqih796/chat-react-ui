@@ -5,27 +5,28 @@ import { useChat } from "../../../../../../context/ChatContext";
 import AiService from "../../../../../../services/AiService";
 import { useAlert } from "../../../../../../hooks/useAlert";
 import PropTypes from "prop-types";
+import messageService from "../../../../../../services/MessageService";
 
 const ChatForm = ({ onLoading, isLoading }) => {
   const { chat, setMessage } = useChat();
   const { onAlert } = useAlert();
 
-  const handleSubmit = React.useCallback(
+  const handleChat = React.useCallback(
     async (e) => {
       e.preventDefault();
       const userMessage = e.target.message.value;
       onLoading(true);
+
+      const payload = {
+        chat_id: chat.id,
+        message_type: "text",
+        content: userMessage,
+      };
+
       try {
-        setMessage((prev) => [
-          ...prev,
-          {
-            id: prev.length + 1,
-            user_id: 1,
-            created_at: new Date().toISOString(),
-            comment: userMessage,
-          },
-        ]);
-        onAlert("success", "Ini Form Chat");
+        const response = await messageService.sendMessage(payload);
+        setMessage((prev) => [...prev, response]);
+        onAlert("success", "Ini adalah Form Chat");
       } catch (error) {
         onAlert("error", error?.message || "Message failed to send!");
       } finally {
@@ -33,10 +34,10 @@ const ChatForm = ({ onLoading, isLoading }) => {
         e.target.message.value = "";
       }
     },
-    [setMessage, onAlert, onLoading]
+    [chat, setMessage, onAlert, onLoading]
   );
 
-  const handleAISubmit = React.useCallback(
+  const handleAI = React.useCallback(
     async (e) => {
       e.preventDefault();
       const userMessage = e.target.message.value;
@@ -46,7 +47,7 @@ const ChatForm = ({ onLoading, isLoading }) => {
           id: prev.length + 1,
           user_id: 1,
           created_at: new Date().toISOString(),
-          comment: userMessage,
+          content: userMessage,
         },
       ]);
       onLoading(true);
@@ -59,7 +60,7 @@ const ChatForm = ({ onLoading, isLoading }) => {
               id: prev.length + 1,
               user_id: 2,
               created_at: new Date().toISOString(),
-              comment: aiResponse,
+              content: aiResponse,
             },
           ]);
           onAlert("success", "Ini AI Chat");
@@ -77,7 +78,7 @@ const ChatForm = ({ onLoading, isLoading }) => {
 
   return (
     <form
-      onSubmit={chat.is_ai ? handleAISubmit : handleSubmit}
+      onSubmit={chat.is_ai ? handleAI : handleChat}
       style={{
         display: "flex",
         alignItems: "center",
