@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import React from "react";
 import { useAlert } from "../../hooks/useAlert";
 import { useAuth } from "../../hooks/useAuth";
@@ -17,9 +17,11 @@ function LoginApp() {
   const handleSignIn = React.useCallback(
     async (e) => {
       e.preventDefault();
+      const email = e.target.email.value;
+      const password = e.target.password.value;
+      console.log("first", email, password);
       try {
-        // await onLogin(e.target.email.value, e.target.password.value);
-        await onLogin("ahmadfaqih796@gmail.com", "123");
+        await onLogin(email, password);
         onAlert("success", "Login successful!");
       } catch (error) {
         console.log("ffffffffffff", error);
@@ -83,7 +85,7 @@ function LoginApp() {
             opacity: isActive ? 0 : 1,
           })}
         >
-          <form>
+          <form onSubmit={handleSignIn}>
             <h1>Sign In</h1>
             <div className="social-icons">
               <a href="#" className="icon">
@@ -100,10 +102,43 @@ function LoginApp() {
               </a>
             </div>
             <span>or use your email password</span>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
+            <TextField
+              type="email"
+              name="email"
+              defaultValue="ahmadfaqih796@gmail.com"
+              placeholder="Email"
+              size="small"
+              fullWidth
+              sx={(theme) => ({
+                my: 2,
+                "& .MuiOutlinedInput-root": {
+                  background: theme.palette.background.main,
+                  "& input": {
+                    background: theme.palette.background.main,
+                    color: theme.palette.text.primary,
+                  },
+                },
+              })}
+            />
+            <TextField
+              name="password"
+              type="password"
+              defaultValue="123"
+              placeholder="Password"
+              size="small"
+              fullWidth
+              sx={(theme) => ({
+                "& .MuiOutlinedInput-root": {
+                  background: theme.palette.background.main,
+                  "& input": {
+                    background: theme.palette.background.main,
+                    color: theme.palette.text.primary,
+                  },
+                },
+              })}
+            />
             <a href="#">Forget Your Password?</a>
-            <button onClick={handleSignIn}>Sign In</button>
+            <button type="submit">Sign In</button>
           </form>
         </Box>
 
