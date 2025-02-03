@@ -1,10 +1,10 @@
 import SendIcon from "@mui/icons-material/Send";
 import { Box, Button, OutlinedInput } from "@mui/material";
+import PropTypes from "prop-types";
 import React from "react";
 import { useChat } from "../../../../../../context/ChatContext";
-import AiService from "../../../../../../services/AiService";
 import { useAlert } from "../../../../../../hooks/useAlert";
-import PropTypes from "prop-types";
+import AiService from "../../../../../../services/AiService";
 import messageService from "../../../../../../services/MessageService";
 
 const ChatForm = ({ onLoading, isLoading }) => {

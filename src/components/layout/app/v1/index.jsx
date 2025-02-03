@@ -17,12 +17,15 @@ import ChatLayout from "./Chat";
 import Profile from "./Profile";
 import Sidebar from "./Sidebar";
 import messageService from "../../../../services/MessageService";
+import client from "../../../../services/feathersSocket";
 
 const WIDTH = {
   sidebar: "70px",
   content: "350px",
   profile: "350px",
 };
+
+const RoomService = client.service("rooms");
 
 const BaseLayout = () => {
   const { chat, setChat, setMessage } = useChat();
@@ -45,6 +48,10 @@ const BaseLayout = () => {
       const response = await messageService.findMessage({
         $limit: -1,
         chat_id: data.id,
+      });
+      await RoomService.create({
+        action: "join",
+        chat_id: data.id || "",
       });
       setMessage(response);
     },

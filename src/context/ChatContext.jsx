@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import React from "react";
-// import { DUMMY_MESSAGES } from "../components/layout/app/v1/components/chat/dummy";
 
 export const ChatContext = React.createContext();
 
