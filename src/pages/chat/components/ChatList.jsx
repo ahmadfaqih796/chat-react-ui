@@ -5,19 +5,39 @@ import { AnimatePresence, motion } from "motion/react";
 import PropTypes from "prop-types";
 import React from "react";
 import { useOutletContext } from "react-router-dom";
-import { USER_LIST } from "./userDummy";
+import chatService from "../../../services/ChatService";
 
 const ChatList = () => {
   const { onOpen, user } = useOutletContext();
+  const [chatList, setChatList] = React.useState([]);
 
   const [search, setSearch] = React.useState("");
-  const data = USER_LIST;
+
+  React.useEffect(() => {
+    const fetchChat = async () => {
+      try {
+        const response = await chatService.findChat();
+        setChatList([
+          ...response,
+          {
+            id: "ai",
+            name: "Faqih AI",
+            caption: "Helpful AI assistant",
+            is_ai: true,
+          },
+        ]);
+      } catch (error) {
+        console.error("Error fetching chats:", error);
+      }
+    };
+    fetchChat();
+  }, []);
 
   const filterData = React.useMemo(() => {
-    return data.filter((item) =>
+    return chatList.filter((item) =>
       item.name.toLowerCase().includes(search.toLowerCase())
     );
-  }, [search, data]);
+  }, [search, chatList]);
 
   const handleOpen = React.useCallback(
     (field) => {
@@ -115,7 +135,9 @@ const ChatList = () => {
                   >
                     <Typography variant="body1">{item.name}</Typography>
                     <Typography variant="caption">
-                      {item.last_message}
+                      {item.last_message?.content ||
+                        item.caption ||
+                        "Belum ada pesan"}
                     </Typography>
                   </Box>
                 </Box>
