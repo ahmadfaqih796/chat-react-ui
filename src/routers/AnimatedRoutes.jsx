@@ -9,6 +9,7 @@ const MainLayout = React.lazy(() => import("../components/layout/MainLayout"));
 
 const AnimatedRoutes = () => {
   const { session, token } = useAuth();
+
   console.log("session", session, token);
   const location = useLocation();
   // const session = true;

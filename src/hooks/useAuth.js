@@ -1,6 +1,7 @@
 import React from "react";
 import { AuthContext } from "../context/AuthContext";
 import feathersClient from "../services/feathersClient";
+import Cookies from "js-cookie";
 
 export const useAuth = () => {
   const { state, dispatch } = React.useContext(AuthContext);
@@ -15,26 +16,31 @@ export const useAuth = () => {
     dispatch({ type: "LOGIN", payload: response });
   };
 
-  const onLogout = async () => {
+  const onLogout = React.useCallback(async () => {
     await feathersClient.logout();
     dispatch({ type: "LOGOUT" });
-  };
+  }, [dispatch]);
 
-  const checkAuth = async () => {
+  const checkAuth = React.useCallback(async () => {
     try {
-      // Cek apakah token masih valid
-      await feathersClient.reAuthenticate();
+      const response = await feathersClient.reAuthenticate();
+      dispatch({ type: "LOGIN", payload: response });
     } catch (error) {
       console.error("Token expired or invalid:", error);
-      onLogout();
+      if (Cookies.get("feathers-jwt")) {
+        onLogout();
+      }
     }
-  };
+  }, [dispatch, onLogout]);
+
+  React.useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
 
   return {
     session: state.user,
     token: state.token,
     onLogin,
     onLogout,
-    checkAuth,
   };
 };
