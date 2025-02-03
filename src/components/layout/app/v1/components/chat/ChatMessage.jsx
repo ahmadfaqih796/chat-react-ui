@@ -4,12 +4,11 @@ import React from "react";
 import { useChat } from "../../../../../../context/ChatContext";
 import PropTypes from "prop-types";
 import { formatAIResponse } from "../../../../../../utils/formatAIResponse";
+import { useAuth } from "../../../../../../hooks/useAuth";
 
 const ChatMessage = ({ loading }) => {
   const { chat, message } = useChat();
-  const session = {
-    id: 1,
-  };
+  const { session } = useAuth();
 
   const scrollRef = React.useRef(null);
   const data = React.useMemo(() => {
@@ -76,7 +75,7 @@ const ChatMessage = ({ loading }) => {
                   maxWidth: "80%",
                   whiteSpace: "pre-wrap",
                   alignSelf:
-                    item.user_id === session?.id ? "flex-end" : "flex-start",
+                    item.sender_id === session?.id ? "flex-end" : "flex-start",
                   textAlign: "justify",
                 }}
               >
@@ -94,12 +93,12 @@ const ChatMessage = ({ loading }) => {
                     display: "block",
                     scrollbarWidth: "none",
                     backgroundColor:
-                      item.user_id === session?.id
+                      item.sender_id === session?.id
                         ? theme.palette.secondary.default
                         : theme.palette.background.container,
                   })}
                   dangerouslySetInnerHTML={{
-                    __html: formatAIResponse(item.comment),
+                    __html: formatAIResponse(item.content || " "),
                   }}
                 />
                 <Typography
