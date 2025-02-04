@@ -1,8 +1,8 @@
-import app from "./feathersClient";
+import { restApp } from "./feathersSocket";
 
 class MessageService {
   constructor() {
-    this.service = app.service("messages");
+    this.service = restApp.service("messages");
   }
 
   async findMessage(params) {

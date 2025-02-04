@@ -1,4 +1,5 @@
 import {
+  AutoAwesome,
   ContactsSharp,
   LogoutOutlined,
   MessageOutlined,
@@ -25,6 +26,12 @@ const MENU_LIST = [
     icon: <ContactsSharp />,
     path: "/contact",
   },
+  {
+    id: 3,
+    title: "Stream",
+    icon: <AutoAwesome />,
+    path: "/stream",
+  },
 ];
 
 const Sidebar = () => {
@@ -44,6 +51,8 @@ const Sidebar = () => {
         return 0;
       case "/contact":
         return 50;
+      case "/stream":
+        return 100;
       default:
         return 0;
     }

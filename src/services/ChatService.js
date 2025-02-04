@@ -1,9 +1,9 @@
 // src/services/ChatService.js
-import app from "./feathersClient";
+import { restApp } from "./feathersSocket";
 
 class ChatService {
   constructor() {
-    this.service = app.service("chat-lists");
+    this.service = restApp.service("chat-lists");
   }
 
   async findChat() {
