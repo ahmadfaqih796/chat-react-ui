@@ -24,8 +24,7 @@ const ChatForm = ({ onLoading, isLoading }) => {
       };
 
       try {
-        const response = await messageService.sendMessage(payload);
-        setMessage((prev) => [...prev, response]);
+        await messageService.sendMessage(payload);
         onAlert("success", "Ini adalah Form Chat");
       } catch (error) {
         onAlert("error", error?.message || "Message failed to send!");
@@ -34,7 +33,7 @@ const ChatForm = ({ onLoading, isLoading }) => {
         e.target.message.value = "";
       }
     },
-    [chat, setMessage, onAlert, onLoading]
+    [chat, onAlert, onLoading]
   );
 
   const handleAI = React.useCallback(

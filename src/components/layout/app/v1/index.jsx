@@ -16,7 +16,6 @@ import Motion from "../../../widget/Motion";
 import ChatLayout from "./Chat";
 import Profile from "./Profile";
 import Sidebar from "./Sidebar";
-import messageService from "../../../../services/MessageService";
 
 const WIDTH = {
   sidebar: "70px",
@@ -25,7 +24,7 @@ const WIDTH = {
 };
 
 const BaseLayout = () => {
-  const { chat, setChat, setMessage } = useChat();
+  const { chat, setChat } = useChat();
 
   const [open, setOpen] = React.useState(false);
   const [isOpenChat, setIsOpenChat] = React.useState(false);
@@ -42,13 +41,8 @@ const BaseLayout = () => {
     async (data) => {
       setChat(data);
       setIsOpenChat(!isOpenChat);
-      const response = await messageService.findMessage({
-        $limit: -1,
-        chat_id: data.id,
-      });
-      setMessage(response);
     },
-    [setChat, isOpenChat, setIsOpenChat, setMessage]
+    [setChat, isOpenChat, setIsOpenChat]
   );
 
   return (

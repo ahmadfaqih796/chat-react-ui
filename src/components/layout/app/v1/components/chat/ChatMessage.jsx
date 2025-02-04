@@ -1,24 +1,65 @@
 import { Box, Chip, Divider, Typography } from "@mui/material";
 import moment from "moment";
-import React from "react";
-import { useChat } from "../../../../../../context/ChatContext";
 import PropTypes from "prop-types";
-import { formatAIResponse } from "../../../../../../utils/formatAIResponse";
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import { useChat } from "../../../../../../context/ChatContext";
 import { useAuth } from "../../../../../../hooks/useAuth";
+import { socketApp } from "../../../../../../services/feathersSocket";
+import { formatAIResponse } from "../../../../../../utils/formatAIResponse";
+
+const CommentService = socketApp.service("messages");
 
 const ChatMessage = ({ loading }) => {
-  const { chat, message } = useChat();
+  const { chat, message, setMessage } = useChat();
   const { session } = useAuth();
 
-  const scrollRef = React.useRef(null);
-  const data = React.useMemo(() => {
-    return message;
-  }, [message]);
-  React.useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+  const scrollRef = useRef(null);
+
+  const memoizedMessages = useMemo(() => message, [message]);
+  const fetchMessages = useCallback(async () => {
+    try {
+      const response = await CommentService.find({
+        query: {
+          chat_id: chat.id,
+          $limit: -1,
+          $sort: { created_at: 1 },
+        },
+      });
+      console.log("response", response);
+      setMessage(response);
+    } catch (error) {
+      console.error("Gagal mengambil pesan", error);
     }
-  }, [data]);
+  }, [chat.id, setMessage]);
+
+  useEffect(() => {
+    if (chat?.id) {
+      fetchMessages();
+      CommentService.on("created", (newMessage) => {
+        if (newMessage.chat_id === chat.id) {
+          setMessage((prevComments) => [...prevComments, newMessage]);
+        }
+      });
+      CommentService.on("removed", (removedMessage) => {
+        setMessage((prevComments) =>
+          prevComments.filter((msg) => msg.id !== removedMessage.id)
+        );
+      });
+    }
+
+    return () => {
+      CommentService.removeListener("created");
+      CommentService.removeListener("removed");
+    };
+  }, [chat.id, fetchMessages, setMessage]);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      setTimeout(() => {
+        scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+      }, 100);
+    }
+  }, [memoizedMessages]);
 
   const isDifferentDate = (date1, date2) => {
     return (
@@ -26,9 +67,10 @@ const ChatMessage = ({ loading }) => {
       new Date(date2).toLocaleDateString()
     );
   };
+
   return (
     <Box sx={{ height: "calc(100% - 70px - 70px)", pl: 2 }}>
-      {Array.isArray(data) && data.length > 0 ? (
+      {Array.isArray(memoizedMessages) && memoizedMessages.length > 0 ? (
         <Box
           ref={scrollRef}
           sx={{
@@ -38,32 +80,18 @@ const ChatMessage = ({ loading }) => {
             paddingRight: "10px",
             flexDirection: "column",
             scrollBehavior: "smooth",
-            // scrollbarWidth: "thin",
-            // scrollbarColor: "rgba(0, 0, 0, 0.2) transparent",
-            "&::-webkit-scrollbar": {
-              width: "5px",
-            },
-            // "&::-webkit-scrollbar-track": {
-            //   background: "#f1f1f1",
-            // },
-            "&::-webkit-scrollbar-thumb": {
-              background: "#888",
-            },
-            // "&::-webkit-scrollbar-thumb:hover": {
-            //   background: "#555",
-            // },
           }}
         >
-          {data?.map((item, index) => (
+          {memoizedMessages?.map((item, index) => (
             <Box
               key={item.id}
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-              }}
+              sx={{ display: "flex", flexDirection: "column" }}
             >
               {index === 0 ||
-              isDifferentDate(data[index - 1].created_at, item.created_at) ? (
+              isDifferentDate(
+                memoizedMessages[index - 1].created_at,
+                item.created_at
+              ) ? (
                 <Divider sx={{ my: 1 }}>
                   <Chip
                     label={moment(item.created_at).format("DD MMMM YYYY")}
@@ -115,11 +143,7 @@ const ChatMessage = ({ loading }) => {
             </Box>
           ))}
           {loading && chat.id === "ai" && (
-            <Box
-              sx={{
-                display: "flex",
-              }}
-            >
+            <Box sx={{ display: "flex" }}>
               <Typography variant="body1" color="textSecondary">
                 AI is typing...
               </Typography>
@@ -137,7 +161,6 @@ const ChatMessage = ({ loading }) => {
           }}
         >
           kosong
-          {/* <Image src={chatImage} width={250} height={250} alt="chat" priority /> */}
         </Box>
       )}
     </Box>
