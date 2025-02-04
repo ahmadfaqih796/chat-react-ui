@@ -80,6 +80,12 @@ const ChatMessage = ({ loading }) => {
             paddingRight: "10px",
             flexDirection: "column",
             scrollBehavior: "smooth",
+            "&::-webkit-scrollbar": {
+              width: "5px",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              background: "#888",
+            },
           }}
         >
           {memoizedMessages?.map((item, index) => (
