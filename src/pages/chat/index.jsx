@@ -3,8 +3,10 @@ import { Box, Divider, IconButton } from "@mui/material";
 import React from "react";
 import PageHeader from "../../components/widget/PageHeader";
 import ChatList from "./components/ChatList";
+import { useAuth } from "../../hooks/useAuth";
 
 const ChatApp = () => {
+  const { session } = useAuth();
   return (
     <Box
       sx={(theme) => ({
@@ -18,7 +20,8 @@ const ChatApp = () => {
       })}
     >
       <PageHeader
-        title="Chat"
+        title={session?.fullname || "Chat"}
+        subtitle={session?.email}
         action={
           <IconButton>
             <AddCommentIcon />
