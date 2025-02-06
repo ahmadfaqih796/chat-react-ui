@@ -4,11 +4,13 @@ import PropTypes from "prop-types";
 import React from "react";
 import { useChat } from "../../../../../../context/ChatContext";
 import { useAlert } from "../../../../../../hooks/useAlert";
+import { useAuth } from "../../../../../../hooks/useAuth";
 import AiService from "../../../../../../services/AiService";
 import messageService from "../../../../../../services/MessageService";
 
 const ChatForm = ({ onLoading, isLoading }) => {
-  const { chat, setMessage } = useChat();
+  const { chat, setAiMessage } = useChat();
+  const { session } = useAuth();
   const { onAlert } = useAlert();
 
   const handleChat = React.useCallback(
@@ -40,11 +42,11 @@ const ChatForm = ({ onLoading, isLoading }) => {
     async (e) => {
       e.preventDefault();
       const userMessage = e.target.message.value;
-      setMessage((prev) => [
+      setAiMessage((prev) => [
         ...prev,
         {
           id: prev.length + 1,
-          user_id: 1,
+          sender_id: session?.id,
           created_at: new Date().toISOString(),
           content: userMessage,
         },
@@ -53,11 +55,11 @@ const ChatForm = ({ onLoading, isLoading }) => {
       try {
         const aiResponse = await AiService.generateResponse(userMessage);
         if (aiResponse) {
-          setMessage((prev) => [
+          setAiMessage((prev) => [
             ...prev,
             {
               id: prev.length + 1,
-              user_id: 2,
+              user_id: "ai",
               created_at: new Date().toISOString(),
               content: aiResponse,
             },
@@ -72,7 +74,7 @@ const ChatForm = ({ onLoading, isLoading }) => {
         e.target.message.value = "";
       }
     },
-    [setMessage, onAlert, onLoading]
+    [setAiMessage, onAlert, onLoading, session]
   );
 
   return (

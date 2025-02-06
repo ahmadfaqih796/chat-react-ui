@@ -10,12 +10,13 @@ import { formatAIResponse } from "../../../../../../utils/formatAIResponse";
 const CommentService = socketApp.service("messages");
 
 const ChatMessage = ({ loading }) => {
-  const { chat, message, setMessage } = useChat();
+  const { chat, message, aiMessage, setMessage } = useChat();
   const { session } = useAuth();
 
   const scrollRef = useRef(null);
 
   const memoizedMessages = useMemo(() => message, [message]);
+  const messageChat = chat?.id === "ai" ? aiMessage : memoizedMessages;
   const fetchMessages = useCallback(async () => {
     try {
       const response = await CommentService.find({
@@ -70,7 +71,7 @@ const ChatMessage = ({ loading }) => {
 
   return (
     <Box sx={{ height: "calc(100% - 70px - 70px)", pl: 2 }}>
-      {Array.isArray(memoizedMessages) && memoizedMessages.length > 0 ? (
+      {Array.isArray(messageChat) && messageChat.length > 0 ? (
         <Box
           ref={scrollRef}
           sx={{
@@ -88,14 +89,14 @@ const ChatMessage = ({ loading }) => {
             },
           }}
         >
-          {memoizedMessages?.map((item, index) => (
+          {messageChat?.map((item, index) => (
             <Box
               key={item.id}
               sx={{ display: "flex", flexDirection: "column" }}
             >
               {index === 0 ||
               isDifferentDate(
-                memoizedMessages[index - 1].created_at,
+                messageChat[index - 1].created_at,
                 item.created_at
               ) ? (
                 <Divider sx={{ my: 1 }}>
